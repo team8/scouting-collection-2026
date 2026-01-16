@@ -197,7 +197,7 @@ const prematchStyles = StyleSheet.create({
     Field: {
       flex: 1,
       width: null,
-      height: null,
+      height: '90%',
       resizeMode: 'contain',
     },
     Highlighted: {
