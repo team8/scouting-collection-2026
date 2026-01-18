@@ -1,22 +1,22 @@
 {
     "one_red": [
-        {"left": 255, "top": 452,"paddingLeft": 30, "paddingRight": 103, "padding": 80, "name": "inside"},
-        {"left": 255, "top": 208, "paddingRight": 15, "padding": 120, "name": "middle"},
-        {"left": 255, "top": 45, "paddingLeft": 30, "paddingRight": 103, "padding": 80, "name": "outside"}
+        {"left": 220, "top": 400,"paddingLeft": 30, "paddingRight": 80, "padding": 80, "name": "inside"},
+        {"left": 220, "top": 203, "paddingRight": 13, "padding": 97, "name": "middle"},
+        {"left": 220, "top": 40, "paddingLeft": 30, "paddingRight": 80, "padding": 80, "name": "outside"}
     ],
     "two_red": [
-        {"left": 205, "top": 446, "paddingLeft": 60, "paddingRight": 80, "padding": 80, "name": "outside"},
-        {"left": 205, "top": 202, "paddingRight": 20, "padding": 120, "name": "middle"},
-        {"left": 205, "top": 38, "paddingLeft": 60, "paddingRight": 80, "padding": 80, "name": "inside"}
+        {"left": 160, "top": 395, "paddingLeft": 60, "paddingRight": 80, "padding": 80, "name": "outside"},
+        {"left": 160, "top": 195, "paddingRight": 43, "padding": 97, "name": "middle"},
+        {"left": 160, "top": 33, "paddingLeft": 60, "paddingRight": 80, "padding": 80, "name": "inside"}
     ],
     "one_blue": [
-        {"left": 255, "top": 445,"paddingLeft": 30, "paddingRight": 103, "padding": 80, "name": "inside"},
-        {"left": 255, "top": 205, "paddingRight": 15, "padding": 117, "name": "middle"},
-        {"left": 255, "top": 40, "paddingLeft": 30, "paddingRight": 103, "padding": 80, "name": "outside"}
+        {"left": 220, "top": 395,"paddingLeft": 30, "paddingRight": 80, "padding": 80, "name": "inside"},
+        {"left": 220, "top": 198, "paddingRight": 13, "padding": 97, "name": "middle"},
+        {"left": 220, "top": 35, "paddingLeft": 30, "paddingRight": 80, "padding": 80, "name": "outside"}
     ],
     "two_blue": [
-        {"left": 205, "top": 454, "paddingLeft": 60, "paddingRight": 80, "padding": 80, "name": "outside"},
-        {"left": 205, "top": 205, "paddingRight": 17, "padding": 123, "name": "middle"},
-        {"left": 205, "top": 43, "paddingLeft": 60, "paddingRight": 80, "padding": 80, "name": "inside"}
+        {"left": 160, "top": 405, "paddingLeft": 60, "paddingRight": 80, "padding": 80, "name": "outside"},
+        {"left": 160, "top": 205, "paddingRight": 43, "padding": 97, "name": "middle"},
+        {"left": 160, "top": 43, "paddingLeft": 60, "paddingRight": 80, "padding": 80, "name": "inside"}
     ]
 }

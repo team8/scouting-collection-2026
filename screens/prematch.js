@@ -22,7 +22,7 @@ const scouterNames = [
 function Prematch(props) {
     const [name, setName] = useState("");
     const [isFocus, setIsFocus] = useState(false);
-    const [predWinner, setPredWinner] = useState("red");
+    // const [predWinner, setPredWinner] = useState("red");
     const [currentRobotPositionName, setCurrentRobotPositionName] = useState("");
     const [fieldOrientation, setFieldOrientation] = useState(props.eventReducer.fieldOrientation);
     const [isEnabled, setIsEnabled] = useState(false);
@@ -41,7 +41,7 @@ function Prematch(props) {
             title: `Prematch | ${matchData.team}`
         })
     }, [])
-
+    /*
     const toggleSwitch = () => {
         if (predWinner === "blue") {
             setPredWinner("blue");
@@ -49,7 +49,7 @@ function Prematch(props) {
             setPredWinner("red");
         }
         setIsEnabled(!isEnabled);
-    }
+    } */
 
     const capitaliseFirstLetter = (word) => {
       return word.charAt(0).toUpperCase() + word.slice(1);
@@ -71,7 +71,7 @@ function Prematch(props) {
         let localMatchData = matchData || {};
         localMatchData.scouter = name || "";
         localMatchData.startingPosition = currentRobotPositionName;
-        localMatchData.predictedWinner = predWinner;
+        // localMatchData.predictedWinner = predWinner;
         localMatchData.intakeLocations = [];
         localMatchData.mobility = false;
         props.setCurrentMatchData(localMatchData);
@@ -105,13 +105,13 @@ function Prematch(props) {
                         setIsFocus(false);
                       }}            
                     />
-                    <Switch
+                    {/* <Switch
                         trackColor={{true: 'blue', false: 'red'}}
                         ios_backgroundColor="red"
                         onValueChange={toggleSwitch}
                         value={isEnabled}
                         style={{ marginLeft: 10 }}
-                    />
+                    /> */}
                 </View>
              </View>
              <View style={[prematchStyles.FieldContainer, prematchStyles.Row]}>
