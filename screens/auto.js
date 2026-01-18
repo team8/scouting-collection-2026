@@ -12,9 +12,10 @@ import * as Types from '../store/types';
 import Blink from '../components/blink';
 import { useNavigation } from '@react-navigation/native';
 import outtakeImages from '../outtake-images';
-import CoralModal from "../components/coralModal";
-import AlgaeAutoModal from "../components/algaeAutoModal";
-import AutoIntakeModal from '../components/autoIntakeModal';
+import AutoIntakeModal from "../components/autoIntakeModal";
+import IntakeLocationModal from "../components/intakeLocationModal";
+import ShotSuccessModal from "../components/shotSuccessModal";
+import FuelShootModal from '../components/fuelShootModal';
 
 
 function Auto(props) {
