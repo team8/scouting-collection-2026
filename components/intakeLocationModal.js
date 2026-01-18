@@ -15,7 +15,7 @@ function IntakeLocationModal(props) {
                         <Text style={[intakeModalStyles.Font, { textAlign: 'center' }]}>Select Intake Location</Text>
                     </View>
                     <View style={{borderWidth: 0, borderColor: 'red'}}>
-                        <Image style={{width: 130, height: 130}} source={require('../assets/game_pieces/coral.png')} />
+                        <Image style={{width: 130, height: 130}} source={require('../assets/game_pieces/fuel.png')} />
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                         <TouchableOpacity style={intakeModalStyles.Substation} onPress={() => {

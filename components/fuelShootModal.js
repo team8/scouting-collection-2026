@@ -2,44 +2,38 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import Modal from 'react-native-modal';
 
-function AlgaeAutoModal(props) {
+function FuelShootModal(props) {
     return (
         <Modal animationInTiming={50} animationIn='fadeIn' animationOutTiming={50} animationOut='fadeOut'
                style={{ alignItems: 'center', justifyContent: 'center', height: '50%', flex: 0.6}}
-               visible = {props.algaeAutoModalVisible} isVisible={props.algaeAutoModalVisible} onRequestClose={() => {
-            props.setAlgaeAutoModalVisible(!props.algaeAutoModalVisible)
+               visible = {props.fuelShootModalVisible} isVisible={props.fuelShootModalVisible} onRequestClose={() => {
+            props.setFuelShootModalVisible(!props.fuelShootModalVisible)
         }}>
             <View style={{flex: 1, width: 750, height: 300, backgroundColor: 'white', borderRadius: 15, padding: 20}}>
-                <View style={[algaeAutoModalStyles.Center]}>
+                <View style={[fuelShootModalStyles.Center]}>
                     <View style={{ flex: 0.3}}>
-                        <Text style={[algaeAutoModalStyles.Font, { textAlign: 'center' }]}>Select Algae Action</Text>
+                        <Text style={[fuelShootModalStyles.Font, { textAlign: 'center' }]}>Select Fuel Action</Text>
                     </View>
                     <View style={{borderWidth: 0, borderColor: 'red'}}>
-                        <Image style={{width: 130, height: 130}} source={require('../assets/game_pieces/algae.png')} />
+                        <Image style={{width: 130, height: 130}} source={require('../assets/game_pieces/fuel.png')} />
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                        <TouchableOpacity style={algaeAutoModalStyles.Substation} onPress={() => {
-                            props.addAction('algaeProcessor')
-                            props.setAlgaeAutoModalVisible(false)
+                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', alignContent: 'center', justifyContent:'center'}}>
+                        <TouchableOpacity style={[fuelShootModalStyles.Substation, {textAlign: 'center'}]} onPress={() => {
+                            props.addAction('fuel')
+                            props.setFuelShootModalVisible(false)
                         }}>
-                            <Text style={algaeAutoModalStyles.ButtonFont}>Algae Processor</Text>
+                            <Text style={fuelShootModalStyles.ButtonFont}>Fuel Scored</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={algaeAutoModalStyles.GroundSubstation} onPress={() => {
-                            props.addAction('algaeRobotNet')
-                            props.setAlgaeAutoModalVisible(false)
+                        <TouchableOpacity style={fuelShootModalStyles.FailedButton} onPress={() => {
+                            props.addAction('failedFuel')
+                            props.setFuelShootModalVisible(false)
                         }}>
-                            <Text style={algaeAutoModalStyles.ButtonFont}>Algae Net</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={algaeAutoModalStyles.FailedButton} onPress={() => {
-                            props.addAction('failedAlgaeRobotNet')
-                            props.setAlgaeAutoModalVisible(false)
-                        }}>
-                            <Text style={algaeAutoModalStyles.ButtonFont}>Failed Algae Net</Text>
+                            <Text style={fuelShootModalStyles.ButtonFont}>Failed Fuel Scored</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={{ flex: 0.5, width: '100%' }}>
-                        <TouchableOpacity style={algaeAutoModalStyles.CancelButton} onPress={() => props.setAlgaeAutoModalVisible(false)}>
-                            <Text style={algaeAutoModalStyles.ButtonFont}>Cancel</Text>
+                        <TouchableOpacity style={fuelShootModalStyles.CancelButton} onPress={() => props.setFuelShootModalVisible(false)}>
+                            <Text style={fuelShootModalStyles.ButtonFont}>Cancel</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -48,7 +42,7 @@ function AlgaeAutoModal(props) {
         )
 }
 
-const algaeAutoModalStyles = StyleSheet.create({
+const fuelShootModalStyles = StyleSheet.create({
     ButtonFont: {
         color: 'white',
         fontSize: 25,
@@ -96,21 +90,21 @@ const algaeAutoModalStyles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center'
     },
-    GroundSubstation: {
-        flex: 1,
-        backgroundColor: 'purple',
-        borderRadius: 15,
-        borderBottomWidth: 5,
-        borderColor: '#540a4d',
-        alignItems: 'center',
-        padding: 10,
-        marginBottom: 10,
-        width: '100%',
-        height: '60%',
-        // marginLeft: 10,
-        alignContent: 'center',
-        justifyContent: 'center'
-    },
+    // GroundSubstation: {
+    //     flex: 1,
+    //     backgroundColor: 'purple',
+    //     borderRadius: 15,
+    //     borderBottomWidth: 5,
+    //     borderColor: '#540a4d',
+    //     alignItems: 'center',
+    //     padding: 10,
+    //     marginBottom: 10,
+    //     width: '100%',
+    //     height: '60%',
+    //     // marginLeft: 10,
+    //     alignContent: 'center',
+    //     justifyContent: 'center'
+    // },
     FailedButton: {
         flex: 1,
         backgroundColor: '#DA4A19',
@@ -139,4 +133,4 @@ const algaeAutoModalStyles = StyleSheet.create({
         alignSelf: 'center'
     }
 })
-export default AlgaeAutoModal;
+export default FuelShootModal;
