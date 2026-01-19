@@ -13,11 +13,6 @@ import { connect } from 'react-redux';
 import * as Types from '../store/types';
 import Blink from '../components/blink';
 import { useNavigation } from '@react-navigation/native';
-import outtakeImages from '../outtake-images';
-import AutoIntakeModal from '../components/autoIntakeModal';
-import IntakeLocationModal from '../components/intakeLocationModal';
-import ShotSuccessModal from '../components/shotSuccessModal';
-import FuelShootModal from '../components/fuelShootModal';
 import { match } from 'assert';
 
 
@@ -26,6 +21,7 @@ function Auto(props) {
   const [fuelScored, setFuelScored] = useState(0);
   const [fuelMissed, setFuelMissed] = useState(0);
   const [fuelShuttled, setFuelShuttled] = useState(0);
+  const [fuelClusters, setFuelClusters] = useState(0);
   const [climbStatus, setClimbStatus] = useState(0);
 
   const [autoActions, setAutoActions] = useState([]);
@@ -50,6 +46,7 @@ function Auto(props) {
     matchData.autoFuel = fuelScored;
     matchData.autoMissedFuel = fuelMissed;
     matchData.autoShuttledFuel = fuelShuttled;
+    matchData.autoFuelClusters = fuelClusters;
     matchData.autoClimbStatus = climbStatus;
     props.setCurrentMatchData(matchData);
     navigation.navigate('teleop');
@@ -71,6 +68,8 @@ function Auto(props) {
       case 'shuttled-1': setFuelShuttled(fuelShuttled + 1); break;
       case 'shuttled+1': setFuelShuttled(fuelShuttled - 1); break;
       case 'shuttled+10': setFuelShuttled(fuelShuttled - 10); break;
+      case 'clusters-1': setFuelClusters(fuelClusters + 1); break;
+      case 'clusters+1': setFuelClusters(fuelClusters - 1); break;
       default: if (autoActions.length != 0) console.log('Wrong autoAction has been undone');
     }
 
@@ -96,6 +95,8 @@ function Auto(props) {
       case 'shuttled-1': setFuelShuttled(fuelShuttled - 1); break;
       case 'shuttled+1': setFuelShuttled(fuelShuttled + 1); break;
       case 'shuttled+10': setFuelShuttled(fuelShuttled + 10); break;
+      case 'clusters-1': setFuelClusters(fuelClusters - 1); break;
+      case 'clusters+1': setFuelClusters(fuelClusters + 1); break;
       default: console.log('Invalid action added in auto');
     }
 
@@ -119,7 +120,7 @@ function Auto(props) {
               margin: 10
             }}
           >
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 140}]} onPress={() => addAction('score-10')}>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 100}]} onPress={() => addAction('score-10')}>
               <Text style={{fontSize: 20}}>-10</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('score-1')}>
@@ -129,7 +130,7 @@ function Auto(props) {
             <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('score+1')}>
               <Text style={{fontSize: 20}}>+1</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 140}]} onPress={() => addAction('score+10')}>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 100}]} onPress={() => addAction('score+10')}>
               <Text style={{fontSize: 20}}>+10</Text>
             </TouchableOpacity>
           </View>
@@ -144,7 +145,7 @@ function Auto(props) {
               margin: 10
             }}
           >
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 140}]} onPress={() => addAction('missed-10')}>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 100}]} onPress={() => addAction('missed-10')}>
               <Text style={{fontSize: 20}}>-10</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('missed-1')}>
@@ -154,7 +155,7 @@ function Auto(props) {
             <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('missed+1')}>
               <Text style={{fontSize: 20}}>+1</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 140}]} onPress={() => addAction('missed+10')}>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 100}]} onPress={() => addAction('missed+10')}>
               <Text style={{fontSize: 20}}>+10</Text>
             </TouchableOpacity>
           </View>
@@ -169,7 +170,7 @@ function Auto(props) {
               margin: 10
             }}
           >
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 140}]} onPress={() => addAction('shuttled-10')}>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 100}]} onPress={() => addAction('shuttled-10')}>
               <Text style={{fontSize: 20}}>-10</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('shuttled-1')}>
@@ -179,7 +180,7 @@ function Auto(props) {
             <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('shuttled+1')}>
               <Text style={{fontSize: 20}}>+1</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 140}]} onPress={() => addAction('shuttled+10')}>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 100}]} onPress={() => addAction('shuttled+10')}>
               <Text style={{fontSize: 20}}>+10</Text>
             </TouchableOpacity>
           </View>
@@ -188,7 +189,20 @@ function Auto(props) {
       </View>
       {/* Column 2 - Climb Status and Navigation Buttons */}
       <View style={{ flex: 0.5 }}>
-        <View style={{flex: 0.7, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{flex: 0.25}}></View>
+        <View style={{flex: 0.25, alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={autoStyles.ScoreHeader}>Fuel Clusters</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 160}]} onPress={() => addAction('clusters-1')}>
+              <Text style={{fontSize: 20}}>-1</Text>
+            </TouchableOpacity>
+            <Text style={autoStyles.Counter}>{fuelClusters}</Text>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 160}]} onPress={() => addAction('clusters+1')}>
+              <Text style={{fontSize: 20}}>+1</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={{flex: 0.25, alignItems: 'center', justifyContent: 'center'}}>
           <Text style={autoStyles.ScoreHeader}>Climb Level</Text>
           <ButtonGroup 
             onPress={setClimbStatus}
@@ -198,7 +212,7 @@ function Auto(props) {
             selectedButtonStyle={{backgroundColor: '#89dcc1', borderBottomColor: '#31a896'}}
           />
         </View>
-        <View style={{flex: 0.3, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}>
+        <View style={{flex: 0.25, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}>
           <TouchableOpacity style={[autoStyles.UndoButton, { width: 300, height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5}]} onPress={() => undo()}>
             <Text style={[autoStyles.PrematchFont, autoStyles.PrematchButtonFont]}>Undo</Text>
           </TouchableOpacity>

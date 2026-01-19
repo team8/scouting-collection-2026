@@ -11,10 +11,12 @@
   "aF": "autoFuel",
   "aMF": "autoMissedFuel",
   "aSF": "autoShuttledFuel",
+  "aFC": "autoFuelClusters",
   
   "tF": "teleopFuel",
   "tMF": "teleopMissedFuel",
   "tSF": "teleopShuttledFuel",
+  "tFC": "teleopFuelClusters",
   
   "aCS": "autoClimbStatus",
   "eCS": "endgameClimbStatus",
@@ -24,7 +26,7 @@
   
   "dR": "driverRating",
   "deR": "defenseRating",
-  "iR":"intakeRating",
+  "iR": "intakeRating",
   "cR": "climbRating",
   
   "clN": "climbNotes",
