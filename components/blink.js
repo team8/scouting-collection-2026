@@ -11,7 +11,7 @@ export default function Blink({ text }) {
               }, 100);
               return () => clearInterval(interval);
           
-            }, 15000);
+            }, 20000);
         return;
       }, []);
 
