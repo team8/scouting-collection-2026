@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 
 function Postmatch(props) {
     const [notes, setNotes] = useState("");
-    const [coopertition, setCoopertition] = useState(false);
+    const [cycleNotes, setCycleNotes] = useState("");
     const [climbNotes, setClimbNotes] = useState("");
     const [robotDied, setRobotDied] = useState(false);
     const [robotTipped, setRobotTipped] = useState(false);
@@ -18,8 +18,11 @@ function Postmatch(props) {
     const [intakeRating, setIntakeRating] = useState(-1.0);
     const [climbRating, setClimbRating] = useState(-1.0);
 
+    const [groundIntake, setGroundIntake] = useState(false);
+    const [sourceIntake, setSourceIntake] = useState(false);
+
     const [climbStatus, setClimbStatus] = useState(0);
-    const endgameText = ['N/A', 'Park', 'Shallow Cage', 'Deep Cage'];
+    const endgameText = ['N/A', 'Level 1', 'Level 2', 'Level 3'];
 
     const matchData = JSON.parse(JSON.stringify(props.eventReducer.currentMatchData));
 
@@ -32,17 +35,17 @@ function Postmatch(props) {
     })
 
     const compile_data = () => {
-        if (notes == "" || climbNotes == "") {
+        if (notes == "" || climbNotes == "" || cycleNotes == "") {
             alert("Please fill in all the notes.");
             return;
         }
         matchData.notes = notes.replace(/ /g, '>').replace(/,/g, '<');
+        matchData.cycleNotes = cycleNotes.replace(/ /g, '>').replace(/,/g, '<');
         matchData.climbNotes = climbNotes.replace(/ /g, '>').replace(/,/g, '<');
-        matchData.coopertition = coopertition;
         matchData.died = robotDied;
         matchData.tipped = robotTipped;
 
-        matchData.climbStatus = (climbStatus == 0 ? "N/A" : (climbStatus == 1 ? "park" : (climbStatus == 2 ? "shallow" : (climbStatus == 3 && "deep"))));
+        matchData.climbStatus = climbStatus;
         matchData.driverRating = driverRating;
         matchData.defenseRating = defenseRating;
         matchData.intakeRating = intakeRating;
@@ -58,9 +61,9 @@ function Postmatch(props) {
                 <View style={[postmatchStyles.InputContainer, {flex: 0.9}]}>
                     <TextInput
                         style={postmatchStyles.TextInputContainer}
-                        placeholder="Topics to Note: Ease of intaking game pieces, speed of cycles, unique aspects of robot (good or bad), where robot shot speaker notes from, etc.. Max Char: 200"
+                        placeholder="Topics to Note: Ease of intaking game pieces, unique aspects of robot (good or bad), where robot shot fuel from, etc.. Max Char: 300"
                         multiline={true}
-                        maxLength = {200}
+                        maxLength = {300}
                         onChangeText={(text) => setNotes(text)}
                     />
                 </View>
@@ -73,12 +76,20 @@ function Postmatch(props) {
                         borderWidth: 0,
                         marginBottom: 20
                     }}>
-                    <Text style={[postmatchStyles.Font, {fontSize: 16, flex: 0.3}]}>Coopertition Bonus</Text>
-                    <Switch
-                        style={{ flex: 0.7 }}
-                        onValueChange={(value) => setCoopertition(value)}
-                        value={coopertition}
-                    />
+                        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 5}}>
+                            <Text style={[postmatchStyles.Font, {fontSize: 15, flex: 0.7, textAlign: 'right'}]}>Used Ground Intake:</Text>
+                            <Switch style={{flex: 0.3, marginLeft: 5}}
+                                onValueChange={(value) => setGroundIntake(value)}
+                                value={groundIntake}
+                            />
+                        </View>
+                        <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 5}}>
+                            <Text style={[postmatchStyles.Font, {fontSize: 15, flex: 0.7, textAlign: 'right'}]}>Used Source Intake:</Text>
+                            <Switch style={{flex: 0.3, marginLeft: 5}}
+                                onValueChange={(value) => setSourceIntake(value)} 
+                                value={sourceIntake} 
+                            />
+                        </View>
                 </View>
             </View>
             <View style={postmatchStyles.Row}>
@@ -111,6 +122,17 @@ function Postmatch(props) {
                     </View>
                 </View>
                 
+            </View>
+            <View style={postmatchStyles.Row}>
+                <Text style={[postmatchStyles.Font, {fontSize: 22, flex: 0.2}]}>Cycle Notes</Text>
+                <View style={[postmatchStyles.InputContainer, {flex: 0.9}]}>
+                    <TextInput 
+                        style={postmatchStyles.TextInputContainer} 
+                        placeholder="Topics to Note: speed of cycles, average size of fuel clusters, etc... Max Char: 300"
+                        multiline={true}
+                        maxLength={300}
+                        onChangeText={(text) => setCycleNotes(text)}/>
+                </View>
             </View>
             <View>
                 <ButtonGroup
@@ -172,7 +194,7 @@ function Postmatch(props) {
                     <Text>{climbRating == -1 ? 'N/a' : climbRating.toString()}</Text>
                 </View>
             </View>
-            <View style={[postmatchStyles.Row, {height: 100 }]}>
+            <View style={[postmatchStyles.Row]}>
                 <TouchableOpacity style={[postmatchStyles.NextButton, {marginHorizontal: 60, marginBottom:25}]} onPress={() => compile_data()}>
                     <View style={postmatchStyles.Center}>
                         <Text style={[postmatchStyles.Font, postmatchStyles.ButtonFont]}>Continue to QRCode</Text>
@@ -186,15 +208,16 @@ function Postmatch(props) {
 const postmatchStyles = StyleSheet.create({
     Row: {
         flexDirection: 'row',
-        marginTop: 15,
-        padding: 10
+        margin: "7 0",
+        padding: 10,
+        flex: 1
     },
     Font: {
         fontFamily: 'Helvetica-Light',
         fontSize: 25,
     },
     InputContainer: {
-        height: 130,
+        height: 100,
         paddingLeft: 20,
         borderWidth: 2,
         borderColor: '#d4d4d4',
