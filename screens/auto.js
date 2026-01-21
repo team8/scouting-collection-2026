@@ -80,26 +80,26 @@ function Auto(props) {
 
   const addAction = (action) => {
     let temp = autoActions;
-    temp.push(action);
+    var push = true;
 
     switch(action) {
-      case 'score-10': setFuelScored(fuelScored - 10); break;
-      case 'score-1': setFuelScored(fuelScored - 1); break;
+      case 'score-10': if (fuelScored >= 10) {setFuelScored(fuelScored - 10);} else {push = false;} break;
+      case 'score-1': if (fuelScored >= 1) {setFuelScored(fuelScored - 1);} else {push = false;} break;
       case 'score+1': setFuelScored(fuelScored + 1); break;
       case 'score+10': setFuelScored(fuelScored + 10); break;
-      case 'missed-10': setFuelMissed(fuelMissed - 10); break;
-      case 'missed-1': setFuelMissed(fuelMissed - 1); break;
+      case 'missed-10': if (fuelMissed >= 10) {setFuelMissed(fuelMissed - 10);} else {push = false;} break;
+      case 'missed-1': if (fuelMissed >= 1) {setFuelMissed(fuelMissed - 1);} else {push = false;} break;
       case 'missed+1': setFuelMissed(fuelMissed + 1); break;
       case 'missed+10': setFuelMissed(fuelMissed + 10); break;
-      case 'shuttled-10': setFuelShuttled(fuelShuttled - 10); break;
-      case 'shuttled-1': setFuelShuttled(fuelShuttled - 1); break;
+      case 'shuttled-10': if (fuelShuttled >= 10) {setFuelShuttled(fuelShuttled - 10);} else {push = false;} break;
+      case 'shuttled-1': if (fuelShuttled >= 1) {setFuelShuttled(fuelShuttled - 1);} else {push = false;} break;
       case 'shuttled+1': setFuelShuttled(fuelShuttled + 1); break;
       case 'shuttled+10': setFuelShuttled(fuelShuttled + 10); break;
-      case 'clusters-1': setFuelClusters(fuelClusters - 1); break;
+      case 'clusters-1': if (fuelClusters >= 1) {setFuelClusters(fuelClusters - 1);} else {push = false;} break;
       case 'clusters+1': setFuelClusters(fuelClusters + 1); break;
       default: console.log('Invalid action added in auto');
     }
-
+    if (push) temp.push(action);
     setAutoActions(temp);
   }
 
@@ -213,11 +213,12 @@ function Auto(props) {
           />
         </View>
         <View style={{flex: 0.25, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}>
-          <TouchableOpacity style={[autoStyles.UndoButton, { width: 300, height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5}]} onPress={() => undo()}>
+
+          {/*<TouchableOpacity style={[autoStyles.UndoButton, { height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5}]} onPress={() => undo()}>
             <Text style={[autoStyles.PrematchFont, autoStyles.PrematchButtonFont]}>Undo</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>*/}
           
-          <TouchableOpacity style={[autoStyles.NextButton, { width: 300, height: 80, marginBottom: 10, marginLeft: 5, marginRight: 5}]} onPress={() => navigate()}>
+          <TouchableOpacity style={[autoStyles.NextButton, { height: 80, marginBottom: 10, marginLeft: 5, marginRight: 5}]} onPress={() => navigate()}>
             <Blink text='Continue to Teleop' />
           </TouchableOpacity>
         </View>

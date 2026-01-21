@@ -75,25 +75,26 @@ function Teleop(props) {
 
   const addAction = (action) => {
     let temp = teleopActions;
-    temp.push(action);
+    var push = true;
 
-    switch (action) {
-      case 'score-10': setFuelScored(fuelScored - 10); break;
-      case 'score-1': setFuelScored(fuelScored - 1); break;
+    switch(action) {
+      case 'score-10': setFuelScored(Math.max(0, fuelScored - 10)); break;
+      case 'score-1': setFuelScored(Math.max(0, fuelScored - 1)); break;
       case 'score+1': setFuelScored(fuelScored + 1); break;
       case 'score+10': setFuelScored(fuelScored + 10); break;
-      case 'missed-10': setFuelMissed(fuelMissed - 10); break;
-      case 'missed-1': setFuelMissed(fuelMissed - 1); break;
+      case 'missed-10': setFuelMissed(Math.max(0, fuelMissed - 10)); break;
+      case 'missed-1': setFuelMissed(Math.max(0, fuelMissed - 1)); break;
       case 'missed+1': setFuelMissed(fuelMissed + 1); break;
       case 'missed+10': setFuelMissed(fuelMissed + 10); break;
-      case 'shuttled-10': setFuelShuttled(fuelShuttled - 10); break;
-      case 'shuttled-1': setFuelShuttled(fuelShuttled - 1); break;
+      case 'shuttled-10': setFuelShuttled(Math.max(0, fuelShuttled - 10)); break;
+      case 'shuttled-1': setFuelShuttled(Math.max(0, fuelShuttled - 1)); break;
       case 'shuttled+1': setFuelShuttled(fuelShuttled + 1); break;
       case 'shuttled+10': setFuelShuttled(fuelShuttled + 10); break;
-      case 'clusters-1': setFuelClusters(fuelClusters - 1); break;
+      case 'clusters-1': setFuelClusters(Math.max(0, fuelClusters - 1)); break;
       case 'clusters+1': setFuelClusters(fuelClusters + 1); break;
-      default: console.log('Invalid action added in teleop');
+      default: console.log('Invalid action added in auto');
     }
+    if (push) temp.push(action);
 
     setTeleopActions(temp);
   }
@@ -199,9 +200,10 @@ function Teleop(props) {
           </View>
         </View>
         <View style={{flex: 0.25, flexDirection: "row", marginTop: 20, justifyContent: 'center', alignItems: 'center'}}>
-          <TouchableOpacity style={[teleopStyles.UndoButton, { width: 300, height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5 }]} onPress={() => undo()}>
+          
+          {/*<TouchableOpacity style={[teleopStyles.UndoButton, { width: 300, height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5 }]} onPress={() => undo()}>
             <Text style={[teleopStyles.PrematchFont, teleopStyles.PrematchButtonFont]}>Undo</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>*/}
 
           <TouchableOpacity style={[teleopStyles.NextButton, { width: 300, height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5, justifyContent: 'center', alignItems: 'center' }]} onPress={() => navigate()}>
             <Text style={[teleopStyles.PrematchFont, teleopStyles.PrematchButtonFont, {textAlign: 'center'}]}>Continue to Postmatch</Text>
