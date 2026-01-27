@@ -56,18 +56,24 @@ function Auto(props) {
     if(autoActions.length == 0) return;
 
     switch (autoActions[autoActions.length - 1]) {
-      case 'score-10': setFuelScored(fuelScored + 10); break;
+      case 'score-5': setFuelScored(fuelScored + 5); break;
+      case 'score-3': setFuelScored(fuelScored + 3); break;
       case 'score-1': setFuelScored(fuelScored + 1); break;
       case 'score+1': setFuelScored(fuelScored - 1); break;
-      case 'score+10': setFuelScored(fuelScored - 10); break;
-      case 'missed-10': setFuelMissed(fuelMissed + 10); break;
+      case 'score+3': setFuelScored(fuelScored - 3); break;
+      case 'score+5': setFuelScored(fuelScored - 5); break;
+      case 'missed-5': setFuelMissed(fuelMissed + 5); break;
+      case 'missed-3': setFuelMissed(fuelMissed + 3); break;
       case 'missed-1': setFuelMissed(fuelMissed + 1); break;
       case 'missed+1': setFuelMissed(fuelMissed - 1); break;
-      case 'missed+10': setFuelMissed(fuelMissed - 10); break;
-      case 'shuttled-10': setFuelShuttled(fuelShuttled + 10); break;
+      case 'missed+3': setFuelMissed(fuelMissed - 3); break;
+      case 'missed+5': setFuelMissed(fuelMissed - 5); break;
+      case 'shuttled-5': setFuelShuttled(fuelShuttled + 5); break;
+      case 'shuttled-3': setFuelShuttled(fuelShuttled + 3); break;
       case 'shuttled-1': setFuelShuttled(fuelShuttled + 1); break;
       case 'shuttled+1': setFuelShuttled(fuelShuttled - 1); break;
-      case 'shuttled+10': setFuelShuttled(fuelShuttled - 10); break;
+      case 'shuttled+3': setFuelShuttled(fuelShuttled - 3); break;
+      case 'shuttled+5': setFuelShuttled(fuelShuttled - 5); break;
       case 'clusters-1': setFuelClusters(fuelClusters + 1); break;
       case 'clusters+1': setFuelClusters(fuelClusters - 1); break;
       default: if (autoActions.length != 0) console.log('Wrong autoAction has been undone');
@@ -83,19 +89,25 @@ function Auto(props) {
     var push = true;
 
     switch(action) {
-      case 'score-10': if (fuelScored >= 10) {setFuelScored(fuelScored - 10);} else {push = false;} break;
-      case 'score-1': if (fuelScored >= 1) {setFuelScored(fuelScored - 1);} else {push = false;} break;
+      case 'score-5': setFuelScored(Math.max(0, fuelScored - 5)); break;
+      case 'score-3': setFuelScored(Math.max(0, fuelScored - 3)); break;
+      case 'score-1': setFuelScored(Math.max(0, fuelScored - 1)); break;
       case 'score+1': setFuelScored(fuelScored + 1); break;
-      case 'score+10': setFuelScored(fuelScored + 10); break;
-      case 'missed-10': if (fuelMissed >= 10) {setFuelMissed(fuelMissed - 10);} else {push = false;} break;
-      case 'missed-1': if (fuelMissed >= 1) {setFuelMissed(fuelMissed - 1);} else {push = false;} break;
+      case 'score+3': setFuelScored(fuelScored + 3); break;
+      case 'score+5': setFuelScored(fuelScored + 5); break;
+      case 'missed-5': setFuelMissed(Math.max(0, fuelMissed - 5)); break;
+      case 'missed-3': setFuelMissed(Math.max(0, fuelMissed - 3)); break;
+      case 'missed-1': setFuelMissed(Math.max(0, fuelMissed - 1)); break;
       case 'missed+1': setFuelMissed(fuelMissed + 1); break;
-      case 'missed+10': setFuelMissed(fuelMissed + 10); break;
-      case 'shuttled-10': if (fuelShuttled >= 10) {setFuelShuttled(fuelShuttled - 10);} else {push = false;} break;
-      case 'shuttled-1': if (fuelShuttled >= 1) {setFuelShuttled(fuelShuttled - 1);} else {push = false;} break;
+      case 'missed+3': setFuelMissed(fuelMissed + 3); break;
+      case 'missed+5': setFuelMissed(fuelMissed + 5); break;
+      case 'shuttled-5': setFuelShuttled(Math.max(0, fuelShuttled - 5)); break;
+      case 'shuttled-3': setFuelShuttled(Math.max(0, fuelShuttled - 3)); break;
+      case 'shuttled-1': setFuelShuttled(Math.max(0, fuelShuttled - 1)); break;
       case 'shuttled+1': setFuelShuttled(fuelShuttled + 1); break;
-      case 'shuttled+10': setFuelShuttled(fuelShuttled + 10); break;
-      case 'clusters-1': if (fuelClusters >= 1) {setFuelClusters(fuelClusters - 1);} else {push = false;} break;
+      case 'shuttled+3': setFuelShuttled(fuelShuttled + 3); break;
+      case 'shuttled+5': setFuelShuttled(fuelShuttled + 5); break;
+      case 'clusters-1': setFuelClusters(Math.max(0, fuelClusters - 1)); break;
       case 'clusters+1': setFuelClusters(fuelClusters + 1); break;
       default: console.log('Invalid action added in auto');
     }
@@ -120,8 +132,11 @@ function Auto(props) {
               margin: 10
             }}
           >
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 100}]} onPress={() => addAction('score-10')}>
-              <Text style={{fontSize: 20}}>-10</Text>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('score-5')}>
+              <Text style={{fontSize: 20}}>-5</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('score-3')}>
+              <Text style={{fontSize: 20}}>-3</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('score-1')}>
               <Text style={{fontSize: 20}}>-1</Text>
@@ -130,8 +145,11 @@ function Auto(props) {
             <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('score+1')}>
               <Text style={{fontSize: 20}}>+1</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 100}]} onPress={() => addAction('score+10')}>
-              <Text style={{fontSize: 20}}>+10</Text>
+            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('score+3')}>
+              <Text style={{fontSize: 20}}>+3</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('score+5')}>
+              <Text style={{fontSize: 20}}>+5</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -145,8 +163,11 @@ function Auto(props) {
               margin: 10
             }}
           >
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 100}]} onPress={() => addAction('missed-10')}>
-              <Text style={{fontSize: 20}}>-10</Text>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('missed-5')}>
+              <Text style={{fontSize: 20}}>-5</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('missed-3')}>
+              <Text style={{fontSize: 20}}>-3</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('missed-1')}>
               <Text style={{fontSize: 20}}>-1</Text>
@@ -155,8 +176,11 @@ function Auto(props) {
             <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('missed+1')}>
               <Text style={{fontSize: 20}}>+1</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 100}]} onPress={() => addAction('missed+10')}>
-              <Text style={{fontSize: 20}}>+10</Text>
+            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('missed+3')}>
+              <Text style={{fontSize: 20}}>+3</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('missed+5')}>
+              <Text style={{fontSize: 20}}>+5</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -170,8 +194,11 @@ function Auto(props) {
               margin: 10
             }}
           >
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 100}]} onPress={() => addAction('shuttled-10')}>
-              <Text style={{fontSize: 20}}>-10</Text>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('shuttled-5')}>
+              <Text style={{fontSize: 20}}>-5</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('shuttled-3')}>
+              <Text style={{fontSize: 20}}>-3</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('shuttled-1')}>
               <Text style={{fontSize: 20}}>-1</Text>
@@ -180,8 +207,11 @@ function Auto(props) {
             <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('shuttled+1')}>
               <Text style={{fontSize: 20}}>+1</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 100}]} onPress={() => addAction('shuttled+10')}>
-              <Text style={{fontSize: 20}}>+10</Text>
+            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('shuttled+3')}>
+              <Text style={{fontSize: 20}}>+3</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('shuttled+5')}>
+              <Text style={{fontSize: 20}}>+5</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -282,7 +312,7 @@ const autoStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: 30,
-    height: 50,
+    height: 60,
     margin: 5,
   },
   Counter: {

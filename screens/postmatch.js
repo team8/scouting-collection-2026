@@ -128,19 +128,20 @@ function Postmatch(props) {
                 <View style={[postmatchStyles.InputContainer, {flex: 0.9}]}>
                     <TextInput 
                         style={postmatchStyles.TextInputContainer} 
-                        placeholder="Topics to Note: speed of cycles, average size of fuel clusters, etc... Max Char: 300"
+                        placeholder="Topics to Note: speed of cycles, average size of fuel clusters, shooting speed, etc... Max Char: 300"
                         multiline={true}
                         maxLength={300}
                         onChangeText={(text) => setCycleNotes(text)}/>
                 </View>
             </View>
-            <View>
+            <View style={postmatchStyles.Row}>
+                <Text style={[postmatchStyles.Font, {fontSize: 22, flex: 0.2, marginTop: 10}]}>Endgame Climb</Text>
                 <ButtonGroup
                     onPress={setClimbStatus}
                     selectedIndex={climbStatus}
                     buttons={endgameText}
                     buttonStyle={postmatchStyles.ButtonGroup}
-                    containerStyle={{height: 50}}
+                    containerStyle={{height: 50, flex: 0.8, marginHorizontal: 10, marginTop: 10}}
                     selectedButtonStyle={{ backgroundColor: '#24a2b6', borderBottomColor: '#188191' }}
                 />
             </View>
@@ -167,7 +168,7 @@ function Postmatch(props) {
                         step={1}
                         onValueChange={(d) => setDefenseRating(d)} 
                     />
-                    <Text>{defenseRating == -1 ? 'N/a' : defenseRating.toString()}</Text>
+                    <Text>{defenseRating == -1 ? 'N/A' : defenseRating.toString()}</Text>
                 </View>
             </View>
             <View style={postmatchStyles.Row}>
@@ -180,7 +181,7 @@ function Postmatch(props) {
                         maximumValue={5}
                         step={1}
                         onValueChange={(i) => setIntakeRating(i)} />
-                    <Text>{intakeRating == -1 ? 'N/a' : intakeRating.toString()}</Text>
+                    <Text>{intakeRating == -1 ? 'N/A' : intakeRating.toString()}</Text>
                 </View>
                 <Text style={[postmatchStyles.LabelText, postmatchStyles.Font, {fontSize: 22, marginTop: 10, flex: 0.1, marginLeft: 5, textAlign: "center"}]} textAlign = "center">Climb</Text>
                 <View style={{flex: 0.4, alignItems: 'stretch'}}>
@@ -191,7 +192,7 @@ function Postmatch(props) {
                         maximumValue={5}
                         step={1}
                         onValueChange={(c) => setClimbRating(c)} />
-                    <Text>{climbRating == -1 ? 'N/a' : climbRating.toString()}</Text>
+                    <Text>{climbRating == -1 ? 'N/A' : climbRating.toString()}</Text>
                 </View>
             </View>
             <View style={[postmatchStyles.Row]}>
