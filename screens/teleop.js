@@ -15,15 +15,14 @@ import { useNavigation } from '@react-navigation/native';
 function Teleop(props) {
   const matchData = JSON.parse(JSON.stringify(props.eventReducer.currentMatchData));
 
-  const [fuelScored, setFuelScored] = useState(0);
-  const [fuelMissed, setFuelMissed] = useState(0);
-  const [fuelShuttled, setFuelShuttled] = useState(0);
-  const [fuelClusters, setFuelClusters] = useState(0);
-  //const [shootRating, setShootRating] = useState(0);
+  const [scored, setScored] = useState(0);
+  const [missed, setMissed] = useState(0);
+  const [shuttled, setShuttled] = useState(0);
+  const [shootRating, setShootRating] = useState(0);
 
   const [teleopActions, setTeleopActions] = useState([]);
   
-  //const shootRange = ['N/A', '0-2 fuel/sec', '2-5 fuel/sec', '5-10 fuel/sec', '10-15 fuel/sec', '15+ fuel/sec'];
+  const shootRange = ['N/A', '1', '2', '3 (Our Shooting)', '4', '5'];
 
   const alliance = props.eventReducer.alliance;
 
@@ -41,10 +40,10 @@ function Teleop(props) {
 
 
   const navigate = () => {
-    matchData.teleopFuel = fuelScored;
-    matchData.teleopMissedFuel = fuelMissed;
-    matchData.teleopShuttledFuel = fuelShuttled;
-    matchData.teleopFuelClusters = fuelClusters;
+    matchData.teleopScoredAttempts = scored;
+    matchData.teleopMissedAttempts = missed;
+    matchData.teleopShuttledAttempts = shuttled;
+    matchData.teleopShootRating = shootRating;
     props.setCurrentMatchData(matchData);
 
     navigation.navigate('postmatch');
@@ -54,26 +53,12 @@ function Teleop(props) {
     if(teleopActions.length == 0) return;
 
     switch (teleopActions[teleopActions.length - 1]) {
-      case 'score-5': setFuelScored(fuelScored + 5); break;
-      case 'score-3': setFuelScored(fuelScored + 3); break;
-      case 'score-1': setFuelScored(fuelScored + 1); break;
-      case 'score+1': setFuelScored(fuelScored - 1); break;
-      case 'score+3': setFuelScored(fuelScored - 3); break;
-      case 'score+5': setFuelScored(fuelScored - 5); break;
-      case 'missed-5': setFuelMissed(fuelMissed + 5); break;
-      case 'missed-3': setFuelMissed(fuelMissed + 3); break;
-      case 'missed-1': setFuelMissed(fuelMissed + 1); break;
-      case 'missed+1': setFuelMissed(fuelMissed - 1); break;
-      case 'missed+3': setFuelMissed(fuelMissed - 3); break;
-      case 'missed+5': setFuelMissed(fuelMissed - 5); break;
-      case 'shuttled-5': setFuelShuttled(fuelShuttled + 5); break;
-      case 'shuttled-3': setFuelShuttled(fuelShuttled + 3); break;
-      case 'shuttled-1': setFuelShuttled(fuelShuttled + 1); break;
-      case 'shuttled+1': setFuelShuttled(fuelShuttled - 1); break;
-      case 'shuttled+3': setFuelShuttled(fuelShuttled - 3); break;
-      case 'shuttled+5': setFuelShuttled(fuelShuttled - 5); break;
-      case 'clusters-1': setFuelClusters(fuelClusters + 1); break;
-      case 'clusters+1': setFuelClusters(fuelClusters - 1); break;
+      case 'scored+1': setScored(Math.max(0, scored - 1)); break;
+      case 'missed+1': setMissed(Math.max(0, missed - 1)); break;
+      case 'shuttled+1': setShuttled(Math.max(0, shuttled - 1)); break;
+      case 'scored-1': setScored(scored + 1); break;
+      case 'missed-1': setMissed(missed + 1); break;
+      case 'shuttled-1': setShuttled(shuttled + 1); break;
       default: if (teleopActions.length != 0) console.log('Wrong teleopAction has been undone');
     }
     
@@ -87,26 +72,12 @@ function Teleop(props) {
     var push = true;
 
     switch(action) {
-      case 'score-5': setFuelScored(Math.max(0, fuelScored - 5)); break;
-      case 'score-3': setFuelScored(Math.max(0, fuelScored - 3)); break;
-      case 'score-1': setFuelScored(Math.max(0, fuelScored - 1)); break;
-      case 'score+1': setFuelScored(fuelScored + 1); break;
-      case 'score+3': setFuelScored(fuelScored + 3); break;
-      case 'score+5': setFuelScored(fuelScored + 5); break;
-      case 'missed-5': setFuelMissed(Math.max(0, fuelMissed - 5)); break;
-      case 'missed-3': setFuelMissed(Math.max(0, fuelMissed - 3)); break;
-      case 'missed-1': setFuelMissed(Math.max(0, fuelMissed - 1)); break;
-      case 'missed+1': setFuelMissed(fuelMissed + 1); break;
-      case 'missed+3': setFuelMissed(fuelMissed + 3); break;
-      case 'missed+5': setFuelMissed(fuelMissed + 5); break;
-      case 'shuttled-5': setFuelShuttled(Math.max(0, fuelShuttled - 5)); break;
-      case 'shuttled-3': setFuelShuttled(Math.max(0, fuelShuttled - 3)); break;
-      case 'shuttled-1': setFuelShuttled(Math.max(0, fuelShuttled - 1)); break;
-      case 'shuttled+1': setFuelShuttled(fuelShuttled + 1); break;
-      case 'shuttled+3': setFuelShuttled(fuelShuttled + 3); break;
-      case 'shuttled+5': setFuelShuttled(fuelShuttled + 5); break;
-      case 'clusters-1': setFuelClusters(Math.max(0, fuelClusters - 1)); break;
-      case 'clusters+1': setFuelClusters(fuelClusters + 1); break;
+      case 'scored+1': setScored(scored + 1); break;
+      case 'missed+1': setMissed(missed + 1); break;
+      case 'shuttled+1': setShuttled(shuttled + 1); break;
+      case 'scored-1': setScored(Math.max(0, scored - 1)); break;
+      case 'missed-1': setMissed(Math.max(0, missed - 1)); break;
+      case 'shuttled-1': setShuttled(Math.max(0, shuttled - 1)); break;
       default: console.log('Invalid action added in auto');
     }
     if (push) temp.push(action);
@@ -122,7 +93,7 @@ function Teleop(props) {
           <Image source={require('../assets/game_pieces/fuel.png')} style={{flex: 1, resizeMode: 'contain', marginTop: 20}} />
         </View>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={teleopStyles.ScoreHeader}>Fuel Scored</Text>
+          <Text style={teleopStyles.ScoreHeader}>Clusters Scored</Text>
           <View
             style={{
               alignItems: 'center',
@@ -131,29 +102,17 @@ function Teleop(props) {
               margin: 10
             }}
           >
-            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('score-5')}>
-              <Text style={{fontSize: 20}}>-5</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[teleopStyles.IncrementButton]} onPress={() => addAction('score-3')}>
-              <Text style={{fontSize: 20}}>-3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[teleopStyles.IncrementButton]} onPress={() => addAction('score-1')}>
+            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('scored-1')}>
               <Text style={{fontSize: 20}}>-1</Text>
             </TouchableOpacity>
-            <Text style={teleopStyles.Counter}>{fuelScored}</Text>
-            <TouchableOpacity style={[teleopStyles.IncrementButton]} onPress={() => addAction('score+1')}>
+            <Text style={teleopStyles.Counter}>{scored}</Text>
+            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('scored+1')}>
               <Text style={{fontSize: 20}}>+1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[teleopStyles.IncrementButton]} onPress={() => addAction('score+3')}>
-              <Text style={{fontSize: 20}}>+3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('score+5')}>
-              <Text style={{fontSize: 20}}>+5</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={teleopStyles.ScoreHeader}>Fuel Missed</Text>
+          <Text style={teleopStyles.ScoreHeader}>Clusters Missed</Text>
           <View
             style={{
               alignItems: 'center',
@@ -162,29 +121,17 @@ function Teleop(props) {
               margin: 10
             }}
           >
-            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('missed-5')}>
-              <Text style={{fontSize: 20}}>-5</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[teleopStyles.IncrementButton]} onPress={() => addAction('missed-3')}>
-              <Text style={{fontSize: 20}}>-3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[teleopStyles.IncrementButton]} onPress={() => addAction('missed-1')}>
+            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('missed-1')}>
               <Text style={{fontSize: 20}}>-1</Text>
             </TouchableOpacity>
-            <Text style={teleopStyles.Counter}>{fuelMissed}</Text>
-            <TouchableOpacity style={[teleopStyles.IncrementButton]} onPress={() => addAction('missed+1')}>
+            <Text style={teleopStyles.Counter}>{missed}</Text>
+            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('missed+1')}>
               <Text style={{fontSize: 20}}>+1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[teleopStyles.IncrementButton]} onPress={() => addAction('missed+3')}>
-              <Text style={{fontSize: 20}}>+3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('missed+5')}>
-              <Text style={{fontSize: 20}}>+5</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={teleopStyles.ScoreHeader}>Fuel Shuttled</Text>
+          <Text style={teleopStyles.ScoreHeader}>Clusters Shuttled</Text>
           <View
             style={{
               alignItems: 'center',
@@ -193,24 +140,12 @@ function Teleop(props) {
               margin: 10
             }}
           >
-            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('shuttled-5')}>
-              <Text style={{fontSize: 20}}>-5</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[teleopStyles.IncrementButton]} onPress={() => addAction('shuttled-3')}>
-              <Text style={{fontSize: 20}}>-3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[teleopStyles.IncrementButton]} onPress={() => addAction('shuttled-1')}>
+            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('shuttled-1')}>
               <Text style={{fontSize: 20}}>-1</Text>
             </TouchableOpacity>
-            <Text style={teleopStyles.Counter}>{fuelShuttled}</Text>
-            <TouchableOpacity style={[teleopStyles.IncrementButton]} onPress={() => addAction('shuttled+1')}>
+            <Text style={teleopStyles.Counter}>{shuttled}</Text>
+            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('shuttled+1')}>
               <Text style={{fontSize: 20}}>+1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[teleopStyles.IncrementButton]} onPress={() => addAction('shuttled+3')}>
-              <Text style={{fontSize: 20}}>+3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('shuttled+5')}>
-              <Text style={{fontSize: 20}}>+5</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -220,19 +155,9 @@ function Teleop(props) {
       <View
         style={{flex: 0.5}}
       >
-        <View style={{flex: 0.75, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={teleopStyles.ScoreHeader}>Fuel Clusters</Text>
-          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}>
-            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginLeft: 160}]} onPress={() => addAction('clusters-1')}>
-              <Text style={{fontSize: 20}}>-1</Text>
-            </TouchableOpacity>
-            <Text style={teleopStyles.Counter}>{fuelClusters}</Text>
-            <TouchableOpacity style={[teleopStyles.IncrementButton, {marginRight: 160}]} onPress={() => addAction('clusters+1')}>
-              <Text style={{fontSize: 20}}>+1</Text>
-            </TouchableOpacity>
-          </View>
+        <View style={{flex: 0.25, alignItems: 'center', justifyContent: 'center'}}>
         </View>
-        {/*<View style={{alignItems: 'stretch'}}>
+        <View style={{flex: 0.5, alignItems: 'stretch'}}>
           <Text style={[teleopStyles.ScoreHeader, {textAlign: 'center', marginBottom: 10}]}>Shooting Rating (approximate)</Text>
           <Slider
               thumbTintColor='#24a2b6'
@@ -242,7 +167,7 @@ function Teleop(props) {
               step={1}
               onValueChange={(i) => setShootRating(i)} />
           <Text>{shootRange[shootRating]}</Text>
-        </View>*/}
+        </View>
         <View style={{flex: 0.25, flexDirection: "row", marginTop: 20, justifyContent: 'center', alignItems: 'center'}}>
           
           {/*<TouchableOpacity style={[teleopStyles.UndoButton, { width: 300, height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5 }]} onPress={() => undo()}>

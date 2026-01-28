@@ -12,6 +12,7 @@ function Postmatch(props) {
     const [cycleNotes, setCycleNotes] = useState("");
     const [climbNotes, setClimbNotes] = useState("");
     const [robotDied, setRobotDied] = useState(false);
+    const [robotStuck, setRobotStuck] = useState(false);
     const [robotTipped, setRobotTipped] = useState(false);
     const [driverRating, setDriverRating] = useState(0.0);
     const [defenseRating, setDefenseRating] = useState(-1.0);
@@ -44,6 +45,7 @@ function Postmatch(props) {
         matchData.climbNotes = climbNotes.replace(/ /g, '>').replace(/,/g, '<');
         matchData.died = robotDied;
         matchData.tipped = robotTipped;
+        matchData.stuck = robotStuck;
 
         matchData.climbStatus = climbStatus;
         matchData.driverRating = driverRating;
@@ -124,14 +126,23 @@ function Postmatch(props) {
                 
             </View>
             <View style={postmatchStyles.Row}>
-                <Text style={[postmatchStyles.Font, {fontSize: 22, flex: 0.2}]}>Cycle Notes</Text>
-                <View style={[postmatchStyles.InputContainer, {flex: 0.9}]}>
+                <Text style={[postmatchStyles.Font, {fontSize: 21, flex: 0.176}]}>Cycle Notes</Text>
+                <View style={[postmatchStyles.InputContainer, {flex: 0.79}]}>
                     <TextInput 
                         style={postmatchStyles.TextInputContainer} 
                         placeholder="Topics to Note: speed of cycles, average size of fuel clusters, shooting speed, etc... Max Char: 300"
                         multiline={true}
                         maxLength={300}
                         onChangeText={(text) => setCycleNotes(text)}/>
+                </View>
+                <View style={{flex: 0.3}}>
+                    <View style={{flexDirection: 'row', marginTop: 5}}>
+                        <Text style={[postmatchStyles.Font, {fontSize: 15, flex: 0.7, textAlign: "right"}]}>Stuck On Bump:</Text>
+                        <Switch 
+                            style={{marginLeft: 5, flex: 0.3}}
+                            onValueChange={(value) => setRobotStuck(value)}
+                            value={robotStuck} />
+                    </View>
                 </View>
             </View>
             <View style={postmatchStyles.Row}>

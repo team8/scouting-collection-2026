@@ -8,21 +8,22 @@
   "sd": "scouted",
   "sr": "scouter",
 
-  "aF": "autoFuel",
-  "aMF": "autoMissedFuel",
-  "aSF": "autoShuttledFuel",
-  "aFC": "autoFuelClusters",
+  "aScA": "autoScoredAttempts",
+  "aMA": "autoMissedAttempts",
+  "aShA": "autoShuttledAttempts",
   
-  "tF": "teleopFuel",
-  "tMF": "teleopMissedFuel",
-  "tSF": "teleopShuttledFuel",
-  "tFC": "teleopFuelClusters",
+  "tScA": "teleopScoredAttempts",
+  "tMA": "teleopMissedAttempts",
+  "tShA": "teleopShuttledAttempts",
+
+  "tSR": "teleopShootRating",
   
   "aCS": "autoClimbStatus",
   "eCS": "endgameClimbStatus",
   
   "d": "died",
   "ti": "tipped",
+  "s": "stuck",
   
   "dR": "driverRating",
   "deR": "defenseRating",

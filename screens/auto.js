@@ -18,10 +18,10 @@ import { match } from 'assert';
 
 function Auto(props) {
 
-  const [fuelScored, setFuelScored] = useState(0);
-  const [fuelMissed, setFuelMissed] = useState(0);
-  const [fuelShuttled, setFuelShuttled] = useState(0);
-  const [fuelClusters, setFuelClusters] = useState(0);
+  const [scored, setScored] = useState(0);
+  const [missed, setMissed] = useState(0);
+  const [shuttled, setShuttled] = useState(0);
+
   const [climbStatus, setClimbStatus] = useState(0);
 
   const [autoActions, setAutoActions] = useState([]);
@@ -43,10 +43,9 @@ function Auto(props) {
   }, [])
 
   const navigate = () => {
-    matchData.autoFuel = fuelScored;
-    matchData.autoMissedFuel = fuelMissed;
-    matchData.autoShuttledFuel = fuelShuttled;
-    matchData.autoFuelClusters = fuelClusters;
+    matchData.autoScoredAttempts = scored;
+    matchData.autoMissedAttempts = missed;
+    matchData.autoShuttledAttempts = shuttled;
     matchData.autoClimbStatus = climbStatus;
     props.setCurrentMatchData(matchData);
     navigation.navigate('teleop');
@@ -56,26 +55,12 @@ function Auto(props) {
     if(autoActions.length == 0) return;
 
     switch (autoActions[autoActions.length - 1]) {
-      case 'score-5': setFuelScored(fuelScored + 5); break;
-      case 'score-3': setFuelScored(fuelScored + 3); break;
-      case 'score-1': setFuelScored(fuelScored + 1); break;
-      case 'score+1': setFuelScored(fuelScored - 1); break;
-      case 'score+3': setFuelScored(fuelScored - 3); break;
-      case 'score+5': setFuelScored(fuelScored - 5); break;
-      case 'missed-5': setFuelMissed(fuelMissed + 5); break;
-      case 'missed-3': setFuelMissed(fuelMissed + 3); break;
-      case 'missed-1': setFuelMissed(fuelMissed + 1); break;
-      case 'missed+1': setFuelMissed(fuelMissed - 1); break;
-      case 'missed+3': setFuelMissed(fuelMissed - 3); break;
-      case 'missed+5': setFuelMissed(fuelMissed - 5); break;
-      case 'shuttled-5': setFuelShuttled(fuelShuttled + 5); break;
-      case 'shuttled-3': setFuelShuttled(fuelShuttled + 3); break;
-      case 'shuttled-1': setFuelShuttled(fuelShuttled + 1); break;
-      case 'shuttled+1': setFuelShuttled(fuelShuttled - 1); break;
-      case 'shuttled+3': setFuelShuttled(fuelShuttled - 3); break;
-      case 'shuttled+5': setFuelShuttled(fuelShuttled - 5); break;
-      case 'clusters-1': setFuelClusters(fuelClusters + 1); break;
-      case 'clusters+1': setFuelClusters(fuelClusters - 1); break;
+      case 'scored+1': setScored(Math.max(0, scored - 1)); break;
+      case 'missed+1': setMissed(Math.max(0, missed - 1)); break;
+      case 'shuttled+1': setShuttled(Math.max(0, shuttled - 1)); break;
+      case 'scored-1': setScored(scored + 1); break;
+      case 'missed-1': setMissed(missed + 1); break;
+      case 'shuttled-1': setShuttled(shuttled + 1); break;
       default: if (autoActions.length != 0) console.log('Wrong autoAction has been undone');
     }
 
@@ -89,26 +74,12 @@ function Auto(props) {
     var push = true;
 
     switch(action) {
-      case 'score-5': setFuelScored(Math.max(0, fuelScored - 5)); break;
-      case 'score-3': setFuelScored(Math.max(0, fuelScored - 3)); break;
-      case 'score-1': setFuelScored(Math.max(0, fuelScored - 1)); break;
-      case 'score+1': setFuelScored(fuelScored + 1); break;
-      case 'score+3': setFuelScored(fuelScored + 3); break;
-      case 'score+5': setFuelScored(fuelScored + 5); break;
-      case 'missed-5': setFuelMissed(Math.max(0, fuelMissed - 5)); break;
-      case 'missed-3': setFuelMissed(Math.max(0, fuelMissed - 3)); break;
-      case 'missed-1': setFuelMissed(Math.max(0, fuelMissed - 1)); break;
-      case 'missed+1': setFuelMissed(fuelMissed + 1); break;
-      case 'missed+3': setFuelMissed(fuelMissed + 3); break;
-      case 'missed+5': setFuelMissed(fuelMissed + 5); break;
-      case 'shuttled-5': setFuelShuttled(Math.max(0, fuelShuttled - 5)); break;
-      case 'shuttled-3': setFuelShuttled(Math.max(0, fuelShuttled - 3)); break;
-      case 'shuttled-1': setFuelShuttled(Math.max(0, fuelShuttled - 1)); break;
-      case 'shuttled+1': setFuelShuttled(fuelShuttled + 1); break;
-      case 'shuttled+3': setFuelShuttled(fuelShuttled + 3); break;
-      case 'shuttled+5': setFuelShuttled(fuelShuttled + 5); break;
-      case 'clusters-1': setFuelClusters(Math.max(0, fuelClusters - 1)); break;
-      case 'clusters+1': setFuelClusters(fuelClusters + 1); break;
+      case 'scored+1': setScored(scored + 1); break;
+      case 'missed+1': setMissed(missed + 1); break;
+      case 'shuttled+1': setShuttled(shuttled + 1); break;
+      case 'scored-1': setScored(Math.max(0, scored - 1)); break;
+      case 'missed-1': setMissed(Math.max(0, missed - 1)); break;
+      case 'shuttled-1': setShuttled(Math.max(0, shuttled - 1)); break;
       default: console.log('Invalid action added in auto');
     }
     if (push) temp.push(action);
@@ -123,7 +94,7 @@ function Auto(props) {
           <Image source={require('../assets/game_pieces/fuel.png')} style={{flex: 1, resizeMode: 'contain', marginTop: 20}} />
         </View>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={autoStyles.ScoreHeader}>Fuel Scored</Text>
+          <Text style={autoStyles.ScoreHeader}>Clusters Scored</Text>
           <View
             style={{
               alignItems: 'center',
@@ -132,29 +103,17 @@ function Auto(props) {
               margin: 10
             }}
           >
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('score-5')}>
-              <Text style={{fontSize: 20}}>-5</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('score-3')}>
-              <Text style={{fontSize: 20}}>-3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('score-1')}>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('scored-1')}>
               <Text style={{fontSize: 20}}>-1</Text>
             </TouchableOpacity>
-            <Text style={autoStyles.Counter}>{fuelScored}</Text>
-            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('score+1')}>
+            <Text style={autoStyles.Counter}>{scored}</Text>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('scored+1')}>
               <Text style={{fontSize: 20}}>+1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('score+3')}>
-              <Text style={{fontSize: 20}}>+3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('score+5')}>
-              <Text style={{fontSize: 20}}>+5</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={autoStyles.ScoreHeader}>Fuel Missed</Text>
+          <Text style={autoStyles.ScoreHeader}>Clusters Missed</Text>
           <View
             style={{
               alignItems: 'center',
@@ -163,29 +122,17 @@ function Auto(props) {
               margin: 10
             }}
           >
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('missed-5')}>
-              <Text style={{fontSize: 20}}>-5</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('missed-3')}>
-              <Text style={{fontSize: 20}}>-3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('missed-1')}>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('missed-1')}>
               <Text style={{fontSize: 20}}>-1</Text>
             </TouchableOpacity>
-            <Text style={autoStyles.Counter}>{fuelMissed}</Text>
-            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('missed+1')}>
+            <Text style={autoStyles.Counter}>{missed}</Text>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('missed+1')}>
               <Text style={{fontSize: 20}}>+1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('missed+3')}>
-              <Text style={{fontSize: 20}}>+3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('missed+5')}>
-              <Text style={{fontSize: 20}}>+5</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={autoStyles.ScoreHeader}>Fuel Shuttled</Text>
+          <Text style={autoStyles.ScoreHeader}>Clusters Shuttled</Text>
           <View
             style={{
               alignItems: 'center',
@@ -194,24 +141,12 @@ function Auto(props) {
               margin: 10
             }}
           >
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('shuttled-5')}>
-              <Text style={{fontSize: 20}}>-5</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('shuttled-3')}>
-              <Text style={{fontSize: 20}}>-3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('shuttled-1')}>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 20}]} onPress={() => addAction('shuttled-1')}>
               <Text style={{fontSize: 20}}>-1</Text>
             </TouchableOpacity>
-            <Text style={autoStyles.Counter}>{fuelShuttled}</Text>
-            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('shuttled+1')}>
+            <Text style={autoStyles.Counter}>{shuttled}</Text>
+            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('shuttled+1')}>
               <Text style={{fontSize: 20}}>+1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton]} onPress={() => addAction('shuttled+3')}>
-              <Text style={{fontSize: 20}}>+3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 20}]} onPress={() => addAction('shuttled+5')}>
-              <Text style={{fontSize: 20}}>+5</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -219,20 +154,7 @@ function Auto(props) {
       </View>
       {/* Column 2 - Climb Status and Navigation Buttons */}
       <View style={{ flex: 0.5 }}>
-        <View style={{flex: 0.25}}></View>
-        <View style={{flex: 0.25, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={autoStyles.ScoreHeader}>Fuel Clusters</Text>
-          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}>
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginLeft: 160}]} onPress={() => addAction('clusters-1')}>
-              <Text style={{fontSize: 20}}>-1</Text>
-            </TouchableOpacity>
-            <Text style={autoStyles.Counter}>{fuelClusters}</Text>
-            <TouchableOpacity style={[autoStyles.IncrementButton, {marginRight: 160}]} onPress={() => addAction('clusters+1')}>
-              <Text style={{fontSize: 20}}>+1</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={{flex: 0.25, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{flex: 0.75, alignItems: 'center', justifyContent: 'center'}}>
           <Text style={autoStyles.ScoreHeader}>Climb Level</Text>
           <ButtonGroup 
             onPress={setClimbStatus}
