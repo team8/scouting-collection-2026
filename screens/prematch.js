@@ -8,19 +8,19 @@ import fieldImages from '../field.js';
 
 let startingPositions = require('../assets/button_settings/starting_positions.json');
 const scouterNames = [
+  { label: 'Joycelyn Zhou', value: 'Joycelyn Zhou' },
   { label: 'Darsh Anaparti', value: 'Darsh Anaparti' },
   { label: 'Johnny Gu', value: 'Johnny Gu' },
   { label: 'Olivia Cho', value: 'Olivia Cho' },
   { label: 'Kaitlin Ye', value: 'Kaitlin Ye' },
   { label: 'Riaan Shah', value: 'Riaan Shah' },
   { label: 'Shaurya Thumalapalli', value: 'Shaurya Thumalapalli' },
-  { label: 'Joycelyn Zhou', value: 'Joycelyn Zhou' },
   { label: 'Zoe Mummah-Su', value: 'Zoe Mummah-Su'},
   { label: 'Aaron Wang', value: 'Aaron Wang' },  
   { label: 'Conor Zhang', value: 'Conor Zhang' },  
   { label: 'Swarat Parab', value: 'Swarat Parab' },  
   { label: 'Calista Chow-Gregory', value: 'Calista Chow-Gregory' },  
-  { label: 'Sumeth Chakka', value: 'Sumeth Chakka' },  
+  { label: 'Sumedh Chakka', value: 'Sumedh Chakka' },  
   { label: 'Amelia Kissner-Colohan', value: 'Amelia Kissner-Colohan' },  
   { label: 'Andrew Jung', value: 'Andrew Jung' },  
   { label: 'Anthony Fan', value: 'Anthony Fan' },  
@@ -31,6 +31,15 @@ const scouterNames = [
   { label: 'Emma Liu', value: 'Emma Liu' }, 
   { label: 'Riaan Shah', value: 'Riaan Shah' },
   { label: 'Jonathan Tang', value: 'Jonathan Tang' },
+  { label: 'Catherine Bradford', value: 'Catherine Bradford' },
+  { label: 'Emma Liang', value: 'Emma Liang' },
+  { label: 'Kseniia Balashova', value: 'Kseniia Balashova' },
+  { label: 'Kyle Chen', value: 'Kyle Chen' },
+  { label: 'Sidhant Vats', value: 'Sidhant Vats' },
+  { label: 'Blake Lopez', value: 'Blake Lopez' },
+  { label: 'Adrien Boeuf', value: 'Adrien Boeuf' },
+  { label: 'Jack Yong', value: 'Jack Yong' },
+  { label: 'Arnav Kamath', value: 'Arnav Kamath' },
 ];
 
 function Prematch(props) {
