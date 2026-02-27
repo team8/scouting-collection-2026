@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "scouting-collection-2026",
-    "slug": "scouting-collection-2026",
+    "slug": "paly-collection-2026",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,7 +13,7 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/041b0e35-e0dc-4fee-b2d0-cf79a0288f1c"
+      "url": "https://u.expo.dev/82cde4e1-ff96-43d8-8af6-f71b71c21442"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -34,9 +34,9 @@
     "runtimeVersion": "1.0.0",
     "extra": {
       "eas": {
-        "projectId": "041b0e35-e0dc-4fee-b2d0-cf79a0288f1c"
+        "projectId": "82cde4e1-ff96-43d8-8af6-f71b71c21442"
       }
     },
-    "owner": "paly-robotics"
+    "owner": "joycelynzhou"
   }
 }

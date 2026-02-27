@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import * as Types from '../store/types';
 import Blink from '../components/blink';
 import { useNavigation } from '@react-navigation/native';
-import { match } from 'assert';
+
 
 
 function Auto(props) {
