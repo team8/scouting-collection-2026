@@ -14,7 +14,7 @@ const scouterNames = [
   { label: 'Olivia Cho', value: 'Olivia Cho' },
   { label: 'Kaitlin Ye', value: 'Kaitlin Ye' },
   { label: 'Riaan Shah', value: 'Riaan Shah' },
-  { label: 'Shaurya Thumalapalli', value: 'Shaurya Thumalapalli' },
+  { label: 'Shaurya Thummalapalli', value: 'Shaurya Thummalapalli' },
   { label: 'Zoe Mummah-Su', value: 'Zoe Mummah-Su'},
   { label: 'Aaron Wang', value: 'Aaron Wang' },  
   { label: 'Conor Zhang', value: 'Conor Zhang' },  
