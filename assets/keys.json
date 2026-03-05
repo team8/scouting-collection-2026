@@ -11,6 +11,8 @@
   "aScA": "autoScoredAttempts",
   "aMA": "autoMissedAttempts",
   "aShA": "autoShuttledAttempts",
+  "aD": "autoDepot",
+  "aM": "autoMid",
   
   "tScA": "teleopScoredAttempts",
   "tMA": "teleopMissedAttempts",
@@ -24,6 +26,9 @@
   "d": "died",
   "ti": "tipped",
   "s": "stuck",
+
+  "uGI": "usedGroundIntake",
+  "uSI": "usedSourceIntake",
   
   "dR": "driverRating",
   "deR": "defenseRating",

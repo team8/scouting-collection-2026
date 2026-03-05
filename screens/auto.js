@@ -22,6 +22,9 @@ function Auto(props) {
   const [missed, setMissed] = useState(0);
   const [shuttled, setShuttled] = useState(0);
 
+  const [depot, setDepot] = useState(false);
+  const [mid, setMid] = useState(false);
+
   const [climbStatus, setClimbStatus] = useState(0);
 
   const [autoActions, setAutoActions] = useState([]);
@@ -47,6 +50,9 @@ function Auto(props) {
     matchData.autoMissedAttempts = missed;
     matchData.autoShuttledAttempts = shuttled;
     matchData.autoClimbStatus = climbStatus;
+
+    matchData.autoDepot = depot;
+    matchData.autoMid = mid;
     props.setCurrentMatchData(matchData);
     navigation.navigate('teleop');
   }
@@ -154,7 +160,7 @@ function Auto(props) {
       </View>
       {/* Column 2 - Climb Status and Navigation Buttons */}
       <View style={{ flex: 0.5 }}>
-        <View style={{flex: 0.75, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{flex: 0.5, alignItems: 'center', justifyContent: 'center'}}>
           <Text style={autoStyles.ScoreHeader}>Climb Level</Text>
           <ButtonGroup 
             onPress={setClimbStatus}
@@ -164,7 +170,24 @@ function Auto(props) {
             selectedButtonStyle={{backgroundColor: '#89dcc1', borderBottomColor: '#31a896'}}
           />
         </View>
-        <View style={{flex: 0.25, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}>
+        <View style={{flex: 0.3, alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={autoStyles.ScoreHeader}>Auto Locations Used</Text>
+          <View style={[autoStyles.Row, {marginTop: 20}]}>
+            <Text style={{fontSize: 18, marginRight: 10}}>Depot</Text>
+            <Switch
+              value={depot}
+              onValueChange={(value) => setDepot(value)}
+            />
+          </View>
+          <View style={autoStyles.Row}>
+            <Text style={{fontSize: 18, marginRight: 10}}>Neutral Zone</Text>
+            <Switch
+              value={mid}
+              onValueChange={(value) => setMid(value)}
+            />
+          </View>
+        </View>
+        <View style={{flex: 0.2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}>
 
           {/*<TouchableOpacity style={[autoStyles.UndoButton, { height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5}]} onPress={() => undo()}>
             <Text style={[autoStyles.PrematchFont, autoStyles.PrematchButtonFont]}>Undo</Text>
@@ -255,6 +278,11 @@ const autoStyles = StyleSheet.create({
   PrematchButtonFont: {
     color: 'white',
     fontSize: 25
+  },
+  Row: {
+    flexDirection: 'row',
+    marginTop: 5,
+    flex: 0.5
   },
 });
 

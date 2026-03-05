@@ -46,6 +46,9 @@ function Postmatch(props) {
         matchData.died = robotDied;
         matchData.tipped = robotTipped;
         matchData.stuck = robotStuck;
+        
+        matchData.usedGroundIntake = groundIntake;
+        matchData.usedSourceIntake = sourceIntake;
 
         matchData.climbStatus = climbStatus;
         matchData.driverRating = driverRating;
@@ -126,11 +129,11 @@ function Postmatch(props) {
                 
             </View>
             <View style={postmatchStyles.Row}>
-                <Text style={[postmatchStyles.Font, {fontSize: 21, flex: 0.176}]}>Cycle Notes</Text>
+                <Text style={[postmatchStyles.Font, {fontSize: 21, flex: 0.176}]}>Cycle/Auto Notes</Text>
                 <View style={[postmatchStyles.InputContainer, {flex: 0.79}]}>
                     <TextInput 
                         style={postmatchStyles.TextInputContainer} 
-                        placeholder="Topics to Note: speed of cycles, average size of fuel clusters, shooting speed, etc... Max Char: 300"
+                        placeholder="Topics to Note: speed of cycles, average size of fuel clusters, approximate length of auto, etc... Max Char: 300"
                         multiline={true}
                         maxLength={300}
                         onChangeText={(text) => setCycleNotes(text)}/>
