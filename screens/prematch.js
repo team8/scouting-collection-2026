@@ -26,7 +26,7 @@ const scouterNames = [
   { label: 'Andrew Jung', value: 'Andrew Jung' },  
   { label: 'Anthony Fan', value: 'Anthony Fan' },  
   { label: 'Vidith Karnam', value: 'Vidith Karnam' }, 
-  { label: 'Sonika Gagdil', value: 'Sonika Gagdil' }, 
+  { label: 'Sonika Gadgil', value: 'Sonika Gadgil' }, 
   { label: 'Odin Strohecker', value: 'Odin Strohecker' }, 
   { label: 'Serena Wang', value: 'Serena Wang' }, 
   { label: 'Emma Liu', value: 'Emma Liu' }, 
