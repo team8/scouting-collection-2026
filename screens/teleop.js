@@ -22,7 +22,7 @@ function Teleop(props) {
 
   const [teleopActions, setTeleopActions] = useState([]);
   
-  const shootRange = ['N/A', '1', '2', '3 (Our Shooting)', '4', '5'];
+  const shootRange = ['N/A', '1', '2', '3', '4', '5'];
 
   const alliance = props.eventReducer.alliance;
 
