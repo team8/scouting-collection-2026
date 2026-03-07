@@ -18,12 +18,12 @@ function Postmatch(props) {
     const [defenseRating, setDefenseRating] = useState(-1.0);
     const [intakeRating, setIntakeRating] = useState(-1.0);
     const [climbRating, setClimbRating] = useState(-1.0);
-    const [clusterSize, setClusterSize] = useState(0.0);
+    const [clusterSize, setClusterSize] = useState("");
 
     const [groundIntake, setGroundIntake] = useState(false);
     const [sourceIntake, setSourceIntake] = useState(false);
 
-    const [climbStatus, setClimbStatus] = useState(0);
+    const [climbStatus, setClimbStatus] = useState("");
     const endgameText = ['N/A', 'Level 1', 'Level 2', 'Level 3'];
 
     const matchData = JSON.parse(JSON.stringify(props.eventReducer.currentMatchData));
@@ -37,7 +37,7 @@ function Postmatch(props) {
     })
 
     const compile_data = () => {
-        if (notes == "" || climbNotes == "" || cycleNotes == "") {
+        if (notes == "" || climbNotes == "" || cycleNotes == "" || clusterSize == "") {
             alert("Please fill in all the notes.");
             return;
         }
@@ -56,9 +56,14 @@ function Postmatch(props) {
         matchData.defenseRating = defenseRating;
         matchData.intakeRating = intakeRating;
         matchData.climbRating = climbRating;
-        matchData.clusterSize = clusterSize;
+        matchData.clusterSize = parseFloat(clusterSize);
         props.setCurrentMatchData(matchData);
         navigation.navigate("qrcode");
+    }
+
+    const changeClusterSize = (value) => {
+        const numericValue = value.replace(/[^0-9]/g, ''); 
+        setClusterSize(parseFloat(numericValue));
     }
 
     return (
@@ -155,10 +160,10 @@ function Postmatch(props) {
                             <TextInput style={[postmatchStyles.TextInputContainer, {marginLeft: 5}]} 
                                 placeholder="Enter cluster size"
                                 keyboardType="numeric"
-                                value={clusterSize.toString()}
+                                value={clusterSize}
                                 multiLine={false}
                                 maxLength={5}
-                                onChangeText={(text) => setClusterSize(parseFloat(text) || 0)}
+                                onChangeText={(text) => changeClusterSize(text)}
                             />
                         </View>
                     </View>
