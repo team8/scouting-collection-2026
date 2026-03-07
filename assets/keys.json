@@ -34,6 +34,7 @@
   "deR": "defenseRating",
   "iR": "intakeRating",
   "cR": "climbRating",
+  "cS": "clusterSize",
   
   "clN": "climbNotes",
   "cyN": "cycleNotes",

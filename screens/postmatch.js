@@ -18,6 +18,7 @@ function Postmatch(props) {
     const [defenseRating, setDefenseRating] = useState(-1.0);
     const [intakeRating, setIntakeRating] = useState(-1.0);
     const [climbRating, setClimbRating] = useState(-1.0);
+    const [clusterSize, setClusterSize] = useState(0.0);
 
     const [groundIntake, setGroundIntake] = useState(false);
     const [sourceIntake, setSourceIntake] = useState(false);
@@ -55,6 +56,7 @@ function Postmatch(props) {
         matchData.defenseRating = defenseRating;
         matchData.intakeRating = intakeRating;
         matchData.climbRating = climbRating;
+        matchData.clusterSize = clusterSize;
         props.setCurrentMatchData(matchData);
         navigation.navigate("qrcode");
     }
@@ -110,17 +112,18 @@ function Postmatch(props) {
                 </View>
                 <View style={{flex: 0.2, marginLeft: 25, alignItems: "center", flexDirection: "column"}}>
                     <View style={{flex: 0.7, alignItems: "center", flexDirection: "row"}}>
-                        <Text style={[postmatchStyles.Font, {fontSize: 15, flex: 0.3, marginRight: 1}]}>Died</Text>
-                        <Text style={[postmatchStyles.Font, {fontSize: 15, flex: 0.3, marginLeft: 15}]}>Tipped</Text>
-                    </View>
-                    <View style={{flex: 0.7, alignItems: "center", flexDirection: "row"}}>
+                        <Text style={[postmatchStyles.Font, {fontSize: 15, flex: 0.7, textAlign: "right"}]}>Died:</Text>
                         <Switch
-                            style={{flex: 0.7, marginLeft: 25, marginRight: 5}}
+                            style={{flex: 0.3, marginLeft: 5}}
                             onValueChange={(value) => setRobotDied(value)}
                             value={robotDied}
                         />
+                        
+                    </View>
+                    <View style={{flex: 0.7, alignItems: "center", flexDirection: "row"}}>
+                        <Text style={[postmatchStyles.Font, {fontSize: 15, flex: 0.7, textAlign: "right"}]}>Tipped:</Text>
                         <Switch
-                            style={{flex: 0.7}}
+                            style={{flex: 0.3, marginLeft: 5}}
                             onValueChange={(value) => setRobotTipped(value)}
                             value={robotTipped}
                         />
@@ -133,7 +136,7 @@ function Postmatch(props) {
                 <View style={[postmatchStyles.InputContainer, {flex: 0.79}]}>
                     <TextInput 
                         style={postmatchStyles.TextInputContainer} 
-                        placeholder="Topics to Note: speed of cycles, average size of fuel clusters, approximate length of auto, etc... Max Char: 300"
+                        placeholder="Topics to Note: speed of cycles, approximate length of auto, etc... Max Char: 300"
                         multiline={true}
                         maxLength={300}
                         onChangeText={(text) => setCycleNotes(text)}/>
@@ -145,6 +148,19 @@ function Postmatch(props) {
                             style={{marginLeft: 5, flex: 0.3}}
                             onValueChange={(value) => setRobotStuck(value)}
                             value={robotStuck} />
+                    </View>
+                    <View style={{flexDirection: 'row', marginTop: 5}}>
+                        <Text style={[postmatchStyles.Font, {fontSize: 15, flex: 0.7, textAlign: "right"}]}>Average Cluster Size:</Text>
+                        <View style={[postmatchStyles.SmallInputContainer, {flex: 0.3, marginLeft: 5}]}>
+                            <TextInput style={[postmatchStyles.TextInputContainer, {marginLeft: 5}]} 
+                                placeholder="Enter cluster size"
+                                keyboardType="numeric"
+                                value={clusterSize.toString()}
+                                multiLine={false}
+                                maxLength={5}
+                                onChangeText={(text) => setClusterSize(parseFloat(text) || 0)}
+                            />
+                        </View>
                     </View>
                 </View>
             </View>
@@ -236,6 +252,13 @@ const postmatchStyles = StyleSheet.create({
         paddingLeft: 20,
         borderWidth: 2,
         borderColor: '#d4d4d4',
+    },
+    SmallInputContainer: {
+        height: 40,
+        width: 60,
+        paddingLeft: 5,
+        borderWidth: 2,
+        borderColor: '#d4d4d4'
     },
     LabelText: {
         marginLeft: 5
