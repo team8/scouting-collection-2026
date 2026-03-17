@@ -15,15 +15,15 @@ function Postmatch(props) {
     const [robotStuck, setRobotStuck] = useState(false);
     const [robotTipped, setRobotTipped] = useState(false);
     const [driverRating, setDriverRating] = useState(0.0);
-    const [defenseRating, setDefenseRating] = useState(-1.0);
-    const [intakeRating, setIntakeRating] = useState(-1.0);
-    const [climbRating, setClimbRating] = useState(-1.0);
+    const [defenseRating, setDefenseRating] = useState(0.0);
+    const [intakeRating, setIntakeRating] = useState(0.0);
+    const [climbRating, setClimbRating] = useState(0.0);
     const [clusterSize, setClusterSize] = useState("");
 
     const [groundIntake, setGroundIntake] = useState(false);
     const [sourceIntake, setSourceIntake] = useState(false);
 
-    const [climbStatus, setClimbStatus] = useState("");
+    const [climbStatus, setClimbStatus] = useState(0);
     const endgameText = ['N/A', 'Level 1', 'Level 2', 'Level 3'];
 
     const matchData = JSON.parse(JSON.stringify(props.eventReducer.currentMatchData));
@@ -37,7 +37,7 @@ function Postmatch(props) {
     })
 
     const compile_data = () => {
-        if (notes == "" || climbNotes == "" || cycleNotes == "" || clusterSize == "") {
+        if (notes == "" || climbNotes == "" || cycleNotes == "" || clusterSize === "") {
             alert("Please fill in all the notes.");
             return;
         }
@@ -185,6 +185,8 @@ function Postmatch(props) {
                 <View style={{flex: 0.4, alignItems: 'stretch'}}>
                     <Slider
                         thumbTintColor='#24a2b6'
+                        minimumTrackTintColor='#d4d4d4'
+                        maximumTrackTintColor='#d4d4d4'
                         value={driverRating}
                         minimumValue={0}
                         maximumValue={5}
@@ -197,13 +199,15 @@ function Postmatch(props) {
                 <View style={{flex: 0.4, alignItems: 'stretch'}}>
                     <Slider
                         thumbTintColor='#24a2b6'
+                        minimumTrackTintColor='#d4d4d4'
+                        maximumTrackTintColor='#d4d4d4'
                         value={defenseRating}
-                        minimumValue={-1}
+                        minimumValue={0}
                         maximumValue={5}
                         step={1}
                         onValueChange={(d) => setDefenseRating(d)} 
                     />
-                    <Text>{defenseRating == -1 ? 'N/A' : defenseRating.toString()}</Text>
+                    <Text>{defenseRating == 0 ? 'N/A' : defenseRating.toString()}</Text>
                 </View>
             </View>
             <View style={postmatchStyles.Row}>
@@ -211,23 +215,27 @@ function Postmatch(props) {
                 <View style={{flex: 0.4, alignItems: 'stretch'}}>
                     <Slider
                         thumbTintColor='#24a2b6'
+                        minimumTrackTintColor='#d4d4d4'
+                        maximumTrackTintColor='#d4d4d4'
                         value={intakeRating}
-                        minimumValue={-1}
+                        minimumValue={0}
                         maximumValue={5}
                         step={1}
                         onValueChange={(i) => setIntakeRating(i)} />
-                    <Text>{intakeRating == -1 ? 'N/A' : intakeRating.toString()}</Text>
+                    <Text>{intakeRating == 0 ? 'N/A' : intakeRating.toString()}</Text>
                 </View>
                 <Text style={[postmatchStyles.LabelText, postmatchStyles.Font, {fontSize: 22, marginTop: 10, flex: 0.1, marginLeft: 5, textAlign: "center"}]} textAlign = "center">Climb</Text>
                 <View style={{flex: 0.4, alignItems: 'stretch'}}>
                     <Slider
                         thumbTintColor='#24a2b6'
+                        minimumTrackTintColor='#d4d4d4'
+                        maximumTrackTintColor='#d4d4d4'
                         value={climbRating}
-                        minimumValue={-1}
+                        minimumValue={0}
                         maximumValue={5}
                         step={1}
                         onValueChange={(c) => setClimbRating(c)} />
-                    <Text>{climbRating == -1 ? 'N/A' : climbRating.toString()}</Text>
+                    <Text>{climbRating == 0 ? 'N/A' : climbRating.toString()}</Text>
                 </View>
             </View>
             <View style={[postmatchStyles.Row]}>
@@ -258,8 +266,11 @@ const postmatchStyles = StyleSheet.create({
         borderWidth: 2,
         borderColor: '#d4d4d4',
     },
+    TextInputContainer: {
+        flex: 1
+    },
     SmallInputContainer: {
-        height: 40,
+        height: 50,
         width: 60,
         paddingLeft: 5,
         borderWidth: 2,

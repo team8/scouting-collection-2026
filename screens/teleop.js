@@ -158,9 +158,11 @@ function Teleop(props) {
         <View style={{flex: 0.25, alignItems: 'center', justifyContent: 'center'}}>
         </View>
         <View style={{flex: 0.5, alignItems: 'stretch'}}>
-          <Text style={[teleopStyles.ScoreHeader, {textAlign: 'center', marginBottom: 10}]}>Shooting Rating (approximate)</Text>
+          <Text style={[teleopStyles.ScoreHeader, {textAlign: 'center', marginBottom: 10}]}>Shooting Rating</Text>
           <Slider
               thumbTintColor='#24a2b6'
+              minimumTrackTintColor='#d4d4d4'
+              maximumTrackTintColor='#d4d4d4'
               value={shootRating}
               minimumValue={0}
               maximumValue={5}
