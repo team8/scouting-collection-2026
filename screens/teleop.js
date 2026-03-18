@@ -10,10 +10,17 @@ import {
 import { Slider } from 'react-native-elements';
 import { connect } from 'react-redux';
 import * as Types from '../store/types';
+
+import NotesModal from '../components/notesModal';
 import { useNavigation } from '@react-navigation/native';
 
 function Teleop(props) {
   const matchData = JSON.parse(JSON.stringify(props.eventReducer.currentMatchData));
+
+  const [notes, setNotes] = useState(matchData.notes ? matchData.notes.replace(/>/g, ' ').replace(/</g, ',') : "");
+  const [cycleNotes, setCycleNotes] = useState(matchData.cycleNotes ? matchData.cycleNotes.replace(/>/g, ' ').replace(/</g, ',') : "");
+  const [climbNotes, setClimbNotes] = useState(matchData.climbNotes ? matchData.climbNotes.replace(/>/g, ' ').replace(/</g, ',') : "");
+      
 
   const [scored, setScored] = useState(0);
   const [missed, setMissed] = useState(0);
@@ -21,6 +28,8 @@ function Teleop(props) {
   const [shootRating, setShootRating] = useState(0);
 
   const [teleopActions, setTeleopActions] = useState([]);
+
+  const [notesModalVisible, setNotesModalVisible] = useState(false);
   
   const shootRange = ['N/A', '1', '2', '3', '4', '5'];
 
@@ -40,6 +49,10 @@ function Teleop(props) {
 
 
   const navigate = () => {
+
+    matchData.notes = notes.replace(/ /g, '>').replace(/,/g, '<');
+    matchData.cycleNotes = cycleNotes.replace(/ /g, '>').replace(/,/g, '<');
+    matchData.climbNotes = climbNotes.replace(/ /g, '>').replace(/,/g, '<');
     matchData.teleopScoredAttempts = scored;
     matchData.teleopMissedAttempts = missed;
     matchData.teleopShuttledAttempts = shuttled;
@@ -87,6 +100,18 @@ function Teleop(props) {
 
   return (
     <View style={teleopStyles.mainContainer}>
+      <NotesModal 
+        notesModalVisible={notesModalVisible} 
+        setNotesModalVisible={setNotesModalVisible}
+        matchPhase='auto'
+        fieldOrientation={fieldOrientation}
+        notes={notes}
+        setNotes={setNotes}
+        cycleNotes={cycleNotes}
+        setCycleNotes={setCycleNotes}
+        climbNotes={climbNotes}
+        setClimbNotes={setClimbNotes}
+      />
       {/* Column 1 - Fuel Scored, Missed, and Shuttled Buttons */}
       <View style={{ flex: 0.5, alignItems: 'center', justifyContent: 'center' }}>
         <View style={{flex: 1}}>
@@ -172,9 +197,9 @@ function Teleop(props) {
         </View>
         <View style={{flex: 0.25, flexDirection: "row", marginTop: 20, justifyContent: 'center', alignItems: 'center'}}>
           
-          {/*<TouchableOpacity style={[teleopStyles.UndoButton, { width: 300, height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5 }]} onPress={() => undo()}>
-            <Text style={[teleopStyles.PrematchFont, teleopStyles.PrematchButtonFont]}>Undo</Text>
-          </TouchableOpacity>*/}
+          <TouchableOpacity style={[teleopStyles.NotesButton, { height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5}]} onPress={() => setNotesModalVisible(true)}>
+            <Text style={[teleopStyles.PrematchFont, teleopStyles.PrematchButtonFont]}>Edit Notes</Text>
+          </TouchableOpacity>
 
           <TouchableOpacity style={[teleopStyles.NextButton, { width: 300, height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5, justifyContent: 'center', alignItems: 'center' }]} onPress={() => navigate()}>
             <Text style={[teleopStyles.PrematchFont, teleopStyles.PrematchButtonFont, {textAlign: 'center'}]}>Continue to Postmatch</Text>
@@ -221,6 +246,15 @@ function Teleop(props) {
         borderColor: '#c98302',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    NotesButton: {
+      flex: 1,
+      backgroundColor: '#1e90ff',
+      borderRadius: 7,
+      borderBottomWidth: 5,
+      borderColor: '#187bcd',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     Button: {
       flex: 1,

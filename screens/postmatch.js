@@ -8,9 +8,13 @@ import { useNavigation } from '@react-navigation/native';
 
 
 function Postmatch(props) {
-    const [notes, setNotes] = useState("");
-    const [cycleNotes, setCycleNotes] = useState("");
-    const [climbNotes, setClimbNotes] = useState("");
+
+    const matchData = JSON.parse(JSON.stringify(props.eventReducer.currentMatchData));
+
+    const [notes, setNotes] = useState(matchData.notes ? matchData.notes.replace(/>/g, ' ').replace(/</g, ',') : "");
+    const [cycleNotes, setCycleNotes] = useState(matchData.cycleNotes ? matchData.cycleNotes.replace(/>/g, ' ').replace(/</g, ',') : "");
+    const [climbNotes, setClimbNotes] = useState(matchData.climbNotes ? matchData.climbNotes.replace(/>/g, ' ').replace(/</g, ',') : "");
+    
     const [robotDied, setRobotDied] = useState(false);
     const [robotStuck, setRobotStuck] = useState(false);
     const [robotTipped, setRobotTipped] = useState(false);
@@ -26,7 +30,6 @@ function Postmatch(props) {
     const [climbStatus, setClimbStatus] = useState(0);
     const endgameText = ['N/A', 'Level 1', 'Level 2', 'Level 3'];
 
-    const matchData = JSON.parse(JSON.stringify(props.eventReducer.currentMatchData));
 
     const navigation = useNavigation(); 
 
@@ -72,6 +75,7 @@ function Postmatch(props) {
                 <Text style={[postmatchStyles.Font, {fontSize: 22, flex: 0.2}]}>Notes</Text>
                 <View style={[postmatchStyles.InputContainer, {flex: 0.9}]}>
                     <TextInput
+                        value={notes}
                         style={postmatchStyles.TextInputContainer}
                         placeholder="Topics to Note: Ease of intaking game pieces, unique aspects of robot (good or bad), where robot shot fuel from, etc.. Max Char: 300"
                         multiline={true}
@@ -108,6 +112,7 @@ function Postmatch(props) {
                 <Text style={[postmatchStyles.Font, {fontSize: 21, flex: 0.143}]}>Climb Notes</Text> 
                 <View style={[postmatchStyles.InputContainer, {flex: 0.642}]}>
                     <TextInput
+                        value={climbNotes}
                         style={postmatchStyles.TextInputContainer}
                         placeholder="Topics to Note: Time at which robot began climbing, ease of assisted climb, why robot failed, etc.. Max Char: 150"
                         multiline={true}
@@ -140,6 +145,7 @@ function Postmatch(props) {
                 <Text style={[postmatchStyles.Font, {fontSize: 21, flex: 0.176}]}>Cycle/Auto Notes</Text>
                 <View style={[postmatchStyles.InputContainer, {flex: 0.79}]}>
                     <TextInput 
+                        value={cycleNotes}
                         style={postmatchStyles.TextInputContainer} 
                         placeholder="Topics to Note: speed of cycles, approximate length of auto, etc... Max Char: 300"
                         multiline={true}

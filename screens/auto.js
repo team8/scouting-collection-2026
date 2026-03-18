@@ -7,11 +7,13 @@ import {
   StyleSheet,
   TouchableOpacity,
   Switch,
+  Touchable,
 } from 'react-native';
 import { ButtonGroup } from 'react-native-elements'
 import { connect } from 'react-redux';
 import * as Types from '../store/types';
 import Blink from '../components/blink';
+import NotesModal from '../components/notesModal';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -22,12 +24,19 @@ function Auto(props) {
   const [missed, setMissed] = useState(0);
   const [shuttled, setShuttled] = useState(0);
 
+
+  const [notes, setNotes] = useState("");
+  const [cycleNotes, setCycleNotes] = useState("");
+  const [climbNotes, setClimbNotes] = useState("");
+
   const [depot, setDepot] = useState(false);
   const [mid, setMid] = useState(false);
 
   const [climbStatus, setClimbStatus] = useState(0);
 
   const [autoActions, setAutoActions] = useState([]);
+
+  const [notesModalVisible, setNotesModalVisible] = useState(false);
 
   const climbOptions = ['N/A', 'Level 1'];
 
@@ -46,6 +55,10 @@ function Auto(props) {
   }, [])
 
   const navigate = () => {
+
+    matchData.notes = notes.replace(/ /g, '>').replace(/,/g, '<');
+    matchData.cycleNotes = cycleNotes.replace(/ /g, '>').replace(/,/g, '<');
+    matchData.climbNotes = climbNotes.replace(/ /g, '>').replace(/,/g, '<');
     matchData.autoScoredAttempts = scored;
     matchData.autoMissedAttempts = missed;
     matchData.autoShuttledAttempts = shuttled;
@@ -94,6 +107,18 @@ function Auto(props) {
 
   return (
     <View style={autoStyles.mainContainer}>
+      <NotesModal 
+        notesModalVisible={notesModalVisible} 
+        setNotesModalVisible={setNotesModalVisible}
+        matchPhase='auto'
+        fieldOrientation={fieldOrientation}
+        notes={notes}
+        setNotes={setNotes}
+        cycleNotes={cycleNotes}
+        setCycleNotes={setCycleNotes}
+        climbNotes={climbNotes}
+        setClimbNotes={setClimbNotes}
+      />
       {/* Column 1 - Fuel Scored, Missed, and Shuttled Buttons */}
       <View style={{ flex: 0.5, alignItems: 'center', justifyContent: 'center' }}>
         <View style={{flex: 1}}>
@@ -189,9 +214,9 @@ function Auto(props) {
         </View>
         <View style={{flex: 0.2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}>
 
-          {/*<TouchableOpacity style={[autoStyles.UndoButton, { height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5}]} onPress={() => undo()}>
-            <Text style={[autoStyles.PrematchFont, autoStyles.PrematchButtonFont]}>Undo</Text>
-          </TouchableOpacity>*/}
+          <TouchableOpacity style={[autoStyles.NotesButton, { height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5}]} onPress={() => setNotesModalVisible(true)}>
+            <Text style={[autoStyles.PrematchFont, autoStyles.PrematchButtonFont]}>Edit Notes</Text>
+          </TouchableOpacity>
           
           <TouchableOpacity style={[autoStyles.NextButton, { height: 80, marginBottom: 10, marginLeft: 5, marginRight: 5}]} onPress={() => navigate()}>
             <Blink text='Continue to Teleop' />
@@ -238,6 +263,15 @@ const autoStyles = StyleSheet.create({
     borderRadius: 7,
     borderBottomWidth: 5,
     borderColor: '#c98302',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  NotesButton: {
+    flex: 1,
+    backgroundColor: '#1e90ff',
+    borderRadius: 7,
+    borderBottomWidth: 5,
+    borderColor: '#187bcd',
     alignItems: 'center',
     justifyContent: 'center',
   },
