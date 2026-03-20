@@ -65,8 +65,8 @@ function Postmatch(props) {
     }
 
     const changeClusterSize = (value) => {
-        const numericValue = value.replace(/[^0-9]/g, ''); 
-        setClusterSize(parseFloat(numericValue));
+        const numericValue = value.replace(/[^0-9.]/g, ""); 
+        setClusterSize(numericValue);
     }
 
     return (
