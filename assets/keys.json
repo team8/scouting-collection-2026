@@ -13,6 +13,7 @@
   "aShA": "autoShuttledAttempts",
   "aD": "autoDepot",
   "aM": "autoMid",
+  "aT": "autoTime",
   
   "tScA": "teleopScoredAttempts",
   "tMA": "teleopMissedAttempts",

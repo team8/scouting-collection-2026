@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import * as Types from '../store/types';
 import Blink from '../components/blink';
 import NotesModal from '../components/notesModal';
+import Stopwatch from '../components/stopwatch';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -23,7 +24,8 @@ function Auto(props) {
   const [scored, setScored] = useState(0);
   const [missed, setMissed] = useState(0);
   const [shuttled, setShuttled] = useState(0);
-
+  
+  const [time, setTime] = useState(0);
 
   const [notes, setNotes] = useState("");
   const [cycleNotes, setCycleNotes] = useState("");
@@ -63,6 +65,7 @@ function Auto(props) {
     matchData.autoMissedAttempts = missed;
     matchData.autoShuttledAttempts = shuttled;
     matchData.autoClimbStatus = climbStatus;
+    matchData.autoTime = time;
 
     matchData.autoDepot = depot;
     matchData.autoMid = mid;
@@ -185,7 +188,7 @@ function Auto(props) {
       </View>
       {/* Column 2 - Climb Status and Navigation Buttons */}
       <View style={{ flex: 0.5 }}>
-        <View style={{flex: 0.5, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'center'}}>
           <Text style={autoStyles.ScoreHeader}>Climb Level</Text>
           <ButtonGroup 
             onPress={setClimbStatus}
@@ -211,6 +214,9 @@ function Auto(props) {
               onValueChange={(value) => setMid(value)}
             />
           </View>
+        </View>
+        <View style={{flex: 0.3, alignItems: 'center', justifyContent: 'center'}}>
+            <Stopwatch time={time} setTime={setTime} />
         </View>
         <View style={{flex: 0.2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}>
 
