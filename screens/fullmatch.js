@@ -65,13 +65,13 @@ function FullMatch(props) {
         matchData.stuck = stuck;
         matchData.tipped = tipped;
 
-        matchData.autoNotes = autoNotes.replace(/>/g, ' ').replace(/</g, ',');
-        matchData.driveNotes = driveNotes.replace(/>/g, ' ').replace(/</g, ',');
-        matchData.intakeNotes = intakeNotes.replace(/>/g, ' ').replace(/</g, ',');
-        matchData.defenseNotes = defenseNotes.replace(/>/g, ' ').replace(/</g, ',');
-        matchData.cycleNotes = cycleNotes.replace(/>/g, ' ').replace(/</g, ',');
-        matchData.climbNotes = climbNotes.replace(/>/g, ' ').replace(/</g, ',');
-        matchData.shootNotes = shootNotes.replace(/>/g, ' ').replace(/</g, ',');
+        matchData.autoNotes = autoNotes.replace(/ /g, '>').replace(/,/g, '<');
+        matchData.driveNotes = driveNotes.replace(/ /g, '>').replace(/,/g, '<');
+        matchData.intakeNotes = intakeNotes.replace(/ /g, '>').replace(/,/g, '<');
+        matchData.defenseNotes = defenseNotes.replace(/ /g, '>').replace(/,/g, '<');
+        matchData.cycleNotes = cycleNotes.replace(/ /g, '>').replace(/,/g, '<');
+        matchData.climbNotes = climbNotes.replace(/ /g, '>').replace(/,/g, '<');
+        matchData.shootNotes = shootNotes.replace(/ /g, '>').replace(/,/g, '<');
         props.setCurrentMatchData(matchData);
         navigation.navigate('qrcode');
     }
