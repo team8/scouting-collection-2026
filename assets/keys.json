@@ -1,9 +1,9 @@
 {
-  "t": "team",
+  "team": "team",
   "mNo": "match",
-  "a": "alliance",
+  "alliance": "alliance",
   "sP": "startingPosition",
-  "e": "event",
+  "event": "event",
   "iL": "intakeLocations",
   "sd": "scouted",
   "sr": "scouter",
@@ -13,7 +13,7 @@
   "aShA": "autoShuttledAttempts",
   "aD": "autoDepot",
   "aM": "autoMid",
-  "aT": "autoTime",
+  "aS": "autoSource",
   
   "tScA": "teleopScoredAttempts",
   "tMA": "teleopMissedAttempts",
@@ -24,9 +24,9 @@
   "aCS": "autoClimbStatus",
   "eCS": "endgameClimbStatus",
   
-  "d": "died",
-  "ti": "tipped",
-  "s": "stuck",
+  "died": "died",
+  "tipped": "tipped",
+  "stuck": "stuck",
 
   "uGI": "usedGroundIntake",
   "uSI": "usedSourceIntake",
@@ -39,5 +39,11 @@
   
   "clN": "climbNotes",
   "cyN": "cycleNotes",
-  "n": "notes"
+  "drN": "driveNotes",
+  "aN": "autoNotes",
+  "iN": "intakeNotes",
+  "deN": "defenseNotes",
+  "sN": "shootNotes",
+
+  "tTM": "timeToMid"
 }

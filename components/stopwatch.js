@@ -50,10 +50,10 @@ const Stopwatch = (props) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text style={styles.Header}>Time to Neutral Zone</Text>
-      <Text style={{ fontSize: 80, fontVariant: ['tabular-nums'] }}>
+      <Text style={{ fontSize: 60, fontVariant: ['tabular-nums'] }}>
         {formatTime(elapsedTime)}
       </Text>
-      <View style={{ flexDirection: 'row', width: '80%', marginTop: 20 }}>
+      <View style={{ flexDirection: 'row', width: '80%', justifyContent: 'space-around' }}>
         <TouchableOpacity style={styles.Button} onPress={running ? stop : start}>
             <Text>{running ? "STOP" : "START"}</Text>
         </TouchableOpacity>

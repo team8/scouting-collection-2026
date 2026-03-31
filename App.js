@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MatchList from "./screens/match_list";
 import Prematch from "./screens/prematch";
 import Auto from "./screens/auto";
+import FullMatch from "./screens/fullmatch"
 import Teleop from "./screens/teleop";
 import Postmatch from "./screens/postmatch";
 import QRCode from "./screens/qrcode";
@@ -42,8 +43,9 @@ export default function App() {
               }}
               />
             <Stack.Screen name="prematch" component={Prematch} />
-            <Stack.Screen name="auto" component={Auto} />
-            <Stack.Screen name="teleop" component={Teleop} />
+            {/* <Stack.Screen name="auto" component={Auto} /> */}
+            {/* <Stack.Screen name="teleop" component={Teleop} /> */}
+            <Stack.Screen name="match" component={FullMatch} />
             <Stack.Screen name="postmatch" component={Postmatch} />
             <Stack.Screen name="qrcode" component={QRCode} />
       </Stack.Navigator>

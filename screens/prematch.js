@@ -87,7 +87,8 @@ function Prematch(props) {
         localMatchData.intakeLocations = [];
         props.setCurrentMatchData(localMatchData);
         props.setFieldOrientationRedux(fieldOrientation);
-        navigation.navigate('auto')
+        // navigation.navigate('auto')
+        navigation.navigate('match')
     }
     
 
