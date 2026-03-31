@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 
   Header: {
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 25,
   },
 
 });

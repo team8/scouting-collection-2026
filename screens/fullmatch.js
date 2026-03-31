@@ -257,7 +257,7 @@ const matchStyles = StyleSheet.create({
     },
     ScoreHeader: {
       fontWeight: 'bold',
-      fontSize: 30,
+      fontSize: 25,
     },
     SwitchContainer: {
         flex: 1,
