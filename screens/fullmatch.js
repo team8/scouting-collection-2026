@@ -53,6 +53,16 @@ function FullMatch(props) {
       }, [])
 
     const navigate = () => {
+        if (autoNotes === "" || 
+            driveNotes === "" || 
+            intakeNotes === "" || 
+            defenseNotes === "" || 
+            cycleNotes === "" || 
+            climbNotes === "" || 
+            shootNotes === "") {
+                alert("Please fill out all notes.");
+                return;
+        }
         matchData.autoDepot = autoDepot;
         matchData.autoSource = autoSource;
         matchData.autoMid = autoMid;
