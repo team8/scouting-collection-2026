@@ -36,6 +36,7 @@ const Stopwatch = (props) => {
     clearInterval(intervalRef.current);
     setRunning(false);
     setElapsedTime(0);
+    props.setTime(0);
     startTimeRef.current = 0;
     pausedTimeRef.current = 0;
   };
