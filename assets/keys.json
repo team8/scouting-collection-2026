@@ -8,21 +8,9 @@
   "sd": "scouted",
   "sr": "scouter",
 
-  "aScA": "autoScoredAttempts",
-  "aMA": "autoMissedAttempts",
-  "aShA": "autoShuttledAttempts",
   "aD": "autoDepot",
   "aM": "autoMid",
   "aS": "autoSource",
-  
-  "tScA": "teleopScoredAttempts",
-  "tMA": "teleopMissedAttempts",
-  "tShA": "teleopShuttledAttempts",
-
-  "tSR": "teleopShootRating",
-  
-  "aCS": "autoClimbStatus",
-  "eCS": "endgameClimbStatus",
   
   "died": "died",
   "tipped": "tipped",
@@ -30,12 +18,6 @@
 
   "uGI": "usedGroundIntake",
   "uSI": "usedSourceIntake",
-  
-  "dR": "driverRating",
-  "deR": "defenseRating",
-  "iR": "intakeRating",
-  "cR": "climbRating",
-  "cS": "clusterSize",
   
   "clN": "climbNotes",
   "cyN": "cycleNotes",
