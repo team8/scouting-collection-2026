@@ -50,7 +50,7 @@ const Stopwatch = (props) => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={styles.Header}>Time to Neutral Zone</Text>
+      <Text style={styles.Header}>Auto Time to Neutral Zone</Text>
       <Text style={{ fontSize: 60, fontVariant: ['tabular-nums'] }}>
         {formatTime(elapsedTime)}
       </Text>
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   Header: {
     fontWeight: 'bold',
     fontSize: 25,
+    textAlign: 'center',
   },
 
 });

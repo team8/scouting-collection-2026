@@ -9,6 +9,8 @@ import {
   Switch,
   TextInput,
   Touchable,
+  KeyboardAvoidingView,
+    ScrollView
 } from 'react-native';
 import { ButtonGroup } from 'react-native-elements'
 import { connect } from 'react-redux';
@@ -16,6 +18,7 @@ import * as Types from '../store/types';
 import NotesModal from '../components/notesModal';
 import Stopwatch from '../components/stopwatch';
 import { useNavigation } from '@react-navigation/native';
+import { useHeaderHeight } from '@react-navigation/elements';
 
 function FullMatch(props) {
     const alliance = props.eventReducer.alliance;
@@ -87,174 +90,163 @@ function FullMatch(props) {
     }
 
     return (
-        <View style={matchStyles.mainContainer}>
-            {/* <NotesModal 
-                notesModalVisible={notesModalVisible}
-                setNotesModalVisible={setNotesModalVisible}
-                autoNotes={autoNotes}
-                setAutoNotes={setAutoNotes}
-                driveNotes={driveNotes}
-                setDriveNotes={setDriveNotes}
-                intakeNotes={intakeNotes}
-                setIntakeNotes={setIntakeNotes}
-                defenseNotes={defenseNotes}
-                setDefenseNotes={setDefenseNotes}
-                cycleNotes={cycleNotes}
-                setCycleNotes={setCycleNotes}
-                climbNotes={climbNotes}
-                setClimbNotes={setClimbNotes}
-                shootNotes={shootNotes}
-                setShootNotes={setShootNotes}
-                /> */}
-            
-            <View style={{flex: 0.7, alignItems: 'center', justifyContent: 'center'}}>
-                <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={matchStyles.Label}>Auto Notes</Text>
-                    <View style={matchStyles.InputContainer}>
-                        <TextInput
-                            value={autoNotes}
-                            onChangeText={(text) => setAutoNotes(text)}
-                            placeholder="Topics to Note: Actions done in auto, accuracy and volume of scoring, any mishaps, etc... Max Char: 300"
-                            multiline={true}
-                            maxLength={300}
-                            style={matchStyles.TextInputContainer}
-                        />
+        <ScrollView 
+            automaticallyAdjustKeyboardInsets={true} 
+            contentContainerStyle={{flexGrow: 1}}
+            style={{flex: 1}}
+            keyboardShouldPersistTaps='handled'
+            keyboardDismissMode='interactive'
+        >
+            <View style={matchStyles.mainContainer}>
+                <View style={{flex: 0.7, alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                        <Text style={matchStyles.Label}>Auto Notes</Text>
+                        <View style={matchStyles.InputContainer}>
+                            <TextInput
+                                value={autoNotes}
+                                onChangeText={(text) => setAutoNotes(text)}
+                                placeholder="Topics to Note: Actions done in auto, accuracy and volume of scoring, any mishaps, etc... Max Char: 300"
+                                multiline={true}
+                                maxLength={300}
+                                style={matchStyles.TextInputContainer}
+                            />
+                        </View>
+                    </View>
+                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                        <Text style={matchStyles.Label}>Drive Notes</Text>
+                        <View style={matchStyles.InputContainer}>
+                            <TextInput
+                                value={driveNotes}
+                                onChangeText={(text) => setDriveNotes(text)}
+                                placeholder="Topics to Note: Smoothness of driving, decisions made, any mishaps/breaks, etc... Max Char: 300"
+                                multiline={true}
+                                maxLength={300}
+                                style={matchStyles.TextInputContainer}
+                            />
+                        </View>
+                    </View>
+                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                        <Text style={matchStyles.Label}>Intake Notes</Text>
+                        <View style={matchStyles.InputContainer}>
+                            <TextInput
+                                value={intakeNotes}
+                                onChangeText={(text) => setIntakeNotes(text)}
+                                placeholder="Topics to Note: Efficiency of intake, any mishaps, etc... Max Char: 300"
+                                multiline={true}
+                                maxLength={300}
+                                style={matchStyles.TextInputContainer}
+                            />
+                        </View>
+                    </View>
+                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                        <Text style={matchStyles.Label}>Defense Notes</Text>
+                        <View style={matchStyles.InputContainer}>
+                            <TextInput
+                                value={defenseNotes}
+                                onChangeText={(text) => setDefenseNotes(text)}
+                                placeholder="Topics to Note: Defense methods used (turning bot, stealing fuel, ...), effectiveness of defense, any mishaps, etc... Max Char: 300"
+                                multiline={true}
+                                maxLength={300}
+                                style={matchStyles.TextInputContainer}
+                            />
+                        </View>
+                    </View>
+                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                        <Text style={matchStyles.Label}>Cycle Notes</Text>
+                        <View style={matchStyles.InputContainer}>
+                            <TextInput
+                                value={cycleNotes}
+                                onChangeText={(text) => setCycleNotes(text)}
+                                placeholder="Topics to Note: Speed of cycles, actions done during active and inactive time, any mishaps, etc... Max Char: 300"
+                                multiline={true}
+                                maxLength={300}
+                                style={matchStyles.TextInputContainer}
+                            />
+                        </View>
+                    </View>
+                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                        <Text style={matchStyles.Label}>Climb Notes</Text>
+                        <View style={matchStyles.InputContainer}>
+                            <TextInput
+                                value={climbNotes}
+                                onChangeText={(text) => setClimbNotes(text)}
+                                placeholder="Topics to Note: Efficiency of climbing, any mishaps, etc... Max Char: 300"
+                                multiline={true}
+                                maxLength={300}
+                                style={matchStyles.TextInputContainer}
+                            />
+                        </View>
+                    </View>
+                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                        <Text style={matchStyles.Label}>Shooting Notes</Text>
+                        <View style={matchStyles.InputContainer}>
+                            <TextInput
+                                value={shootNotes}
+                                onChangeText={(text) => setShootNotes(text)}
+                                placeholder="Topics to Note: Accuracy and speed of shooting, effectiveness of indexing, ability to react to defense, any mishaps, etc... Max Char: 300"
+                                multiline={true}
+                                maxLength={300}
+                                style={matchStyles.TextInputContainer}
+                            />
+                        </View>
                     </View>
                 </View>
-                <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={matchStyles.Label}>Drive Notes</Text>
-                    <View style={matchStyles.InputContainer}>
-                        <TextInput
-                            value={driveNotes}
-                            onChangeText={(text) => setDriveNotes(text)}
-                            placeholder="Topics to Note: Smoothness of driving, decisions made, any mishaps/breaks, etc... Max Char: 300"
-                            multiline={true}
-                            maxLength={300}
-                            style={matchStyles.TextInputContainer}
+                <View style={{flex: 0.3, alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={matchStyles.SwitchContainer}>
+                        <Stopwatch
+                            time={autoTime}
+                            setTime={setAutoTime} 
                         />
                     </View>
-                </View>
-                <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={matchStyles.Label}>Intake Notes</Text>
-                    <View style={matchStyles.InputContainer}>
-                        <TextInput
-                            value={intakeNotes}
-                            onChangeText={(text) => setIntakeNotes(text)}
-                            placeholder="Topics to Note: Efficiency of intake, any mishaps, etc... Max Char: 300"
-                            multiline={true}
-                            maxLength={300}
-                            style={matchStyles.TextInputContainer}
-                        />
+                    <View style={matchStyles.SwitchContainer}>
+                        <Text style={matchStyles.ScoreHeader}>Robot Mishaps</Text>
+                        <View style={matchStyles.Row}>
+                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Died</Text>
+                            <Switch style={{flex: 0.5}} value={died} onValueChange={setDied} />
+                        </View>
+                        <View style={matchStyles.Row}>
+                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Stuck</Text>
+                            <Switch style={{flex: 0.5}} value={stuck} onValueChange={setStuck} />
+                        </View>
+                        <View style={matchStyles.Row}>
+                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Tipped</Text>
+                            <Switch style={{flex: 0.5}} value={tipped} onValueChange={setTipped} />
+                        </View>
                     </View>
-                </View>
-                <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={matchStyles.Label}>Defense Notes</Text>
-                    <View style={matchStyles.InputContainer}>
-                        <TextInput
-                            value={defenseNotes}
-                            onChangeText={(text) => setDefenseNotes(text)}
-                            placeholder="Topics to Note: Defense methods used (turning bot, stealing fuel, ...), effectiveness of defense, any mishaps, etc... Max Char: 300"
-                            multiline={true}
-                            maxLength={300}
-                            style={matchStyles.TextInputContainer}
-                        />
+                    <View style={matchStyles.SwitchContainer}>
+                        <Text style={matchStyles.ScoreHeader}>Auto Locations Used</Text>
+                        <View style={matchStyles.Row}>
+                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Depot</Text>
+                            <Switch style={{flex: 0.5}} value={autoDepot} onValueChange={setAutoDepot} />
+                        </View>
+                        <View style={matchStyles.Row}>
+                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Source</Text>
+                            <Switch style={{flex: 0.5}} value={autoSource} onValueChange={setAutoSource} />
+                        </View>
+                        <View style={matchStyles.Row}>
+                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Neutral Zone</Text>
+                            <Switch style={{flex: 0.5}} value={autoMid} onValueChange={setAutoMid} />
+                        </View>
                     </View>
-                </View>
-                <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={matchStyles.Label}>Cycle Notes</Text>
-                    <View style={matchStyles.InputContainer}>
-                        <TextInput
-                            value={cycleNotes}
-                            onChangeText={(text) => setCycleNotes(text)}
-                            placeholder="Topics to Note: Speed of cycles, actions done during active and inactive time, any mishaps, etc... Max Char: 300"
-                            multiline={true}
-                            maxLength={300}
-                            style={matchStyles.TextInputContainer}
-                        />
+                    <View style={matchStyles.SwitchContainer}>
+                        <Text style={matchStyles.ScoreHeader}>Intake Locations</Text>
+                        <View style={matchStyles.Row}>
+                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Ground Intake</Text>
+                            <Switch style={{flex: 0.5}} value={groundIntake} onValueChange={setGroundIntake} />
+                        </View>
+                        <View style={matchStyles.Row}>
+                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Source Intake</Text>
+                            <Switch style={{flex: 0.5}} value={sourceIntake} onValueChange={setSourceIntake} />
+                        </View>
                     </View>
-                </View>
-                <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={matchStyles.Label}>Climb Notes</Text>
-                    <View style={matchStyles.InputContainer}>
-                        <TextInput
-                            value={climbNotes}
-                            onChangeText={(text) => setClimbNotes(text)}
-                            placeholder="Topics to Note: Efficiency of climbing, any mishaps, etc... Max Char: 300"
-                            multiline={true}
-                            maxLength={300}
-                            style={matchStyles.TextInputContainer}
-                        />
-                    </View>
-                </View>
-                <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={matchStyles.Label}>Shooting Notes</Text>
-                    <View style={matchStyles.InputContainer}>
-                        <TextInput
-                            value={shootNotes}
-                            onChangeText={(text) => setShootNotes(text)}
-                            placeholder="Topics to Note: Accuracy and speed of shooting, effectiveness of indexing, ability to react to defense, any mishaps, etc... Max Char: 300"
-                            multiline={true}
-                            maxLength={300}
-                            style={matchStyles.TextInputContainer}
-                        />
+                    <View style={{flex: 0.5, alignItems: 'center', justifyContent: 'center'}}>
+                        <TouchableOpacity style={[matchStyles.NextButton, { width: 300, height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5, justifyContent: 'center', alignItems: 'center' }]} onPress={() => navigate()}>
+                            <Text style={[matchStyles.ButtonFont, {textAlign: 'center'}]}>Continue to QR Code</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
-            <View style={{flex: 0.3, alignItems: 'center', justifyContent: 'center'}}>
-                <View style={matchStyles.SwitchContainer}>
-                    <View style={matchStyles.Row}>
-                        <Text style={[matchStyles.Label, {flex: 0.5}]}>Died</Text>
-                        <Switch style={{flex: 0.5}} value={died} onValueChange={setDied} />
-                    </View>
-                    <View style={matchStyles.Row}>
-                        <Text style={[matchStyles.Label, {flex: 0.5}]}>Stuck</Text>
-                        <Switch style={{flex: 0.5}} value={stuck} onValueChange={setStuck} />
-                    </View>
-                    <View style={matchStyles.Row}>
-                        <Text style={[matchStyles.Label, {flex: 0.5}]}>Tipped</Text>
-                        <Switch style={{flex: 0.5}} value={tipped} onValueChange={setTipped} />
-                    </View>
-                </View>
-                <View style={matchStyles.SwitchContainer}>
-                    <Text style={matchStyles.ScoreHeader}>Auto Locations Used</Text>
-                    <View style={matchStyles.Row}>
-                        <Text style={[matchStyles.Label, {flex: 0.5}]}>Depot</Text>
-                        <Switch style={{flex: 0.5}} value={autoDepot} onValueChange={setAutoDepot} />
-                    </View>
-                    <View style={matchStyles.Row}>
-                        <Text style={[matchStyles.Label, {flex: 0.5}]}>Source</Text>
-                        <Switch style={{flex: 0.5}} value={autoSource} onValueChange={setAutoSource} />
-                    </View>
-                    <View style={matchStyles.Row}>
-                        <Text style={[matchStyles.Label, {flex: 0.5}]}>Neutral Zone</Text>
-                        <Switch style={{flex: 0.5}} value={autoMid} onValueChange={setAutoMid} />
-                    </View>
-                </View>
-                <View style={matchStyles.SwitchContainer}>
-                    <Text style={matchStyles.ScoreHeader}>Intake Locations</Text>
-                    <View style={matchStyles.Row}>
-                        <Text style={[matchStyles.Label, {flex: 0.5}]}>Ground Intake</Text>
-                        <Switch style={{flex: 0.5}} value={groundIntake} onValueChange={setGroundIntake} />
-                    </View>
-                    <View style={matchStyles.Row}>
-                        <Text style={[matchStyles.Label, {flex: 0.5}]}>Source Intake</Text>
-                        <Switch style={{flex: 0.5}} value={sourceIntake} onValueChange={setSourceIntake} />
-                    </View>
-                </View>
-                <View style={matchStyles.SwitchContainer}>
-                    <Stopwatch
-                        time={autoTime}
-                        setTime={setAutoTime} 
-                    />
-                </View>
-                <View style={{flex: 0.5, alignItems: 'center', justifyContent: 'center'}}>
-                    <TouchableOpacity style={[matchStyles.NextButton, { width: 300, height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5, justifyContent: 'center', alignItems: 'center' }]} onPress={() => navigate()}>
-                        <Text style={[matchStyles.ButtonFont, {textAlign: 'center'}]}>Continue to QR Code</Text>
-                    </TouchableOpacity>
-                </View>
-
-            </View>
-        </View>
+        </ScrollView>
     );
 
 }
@@ -270,7 +262,7 @@ const matchStyles = StyleSheet.create({
       fontSize: 25,
     },
     SwitchContainer: {
-        flex: 1,
+        flex: 0.8,
         alignItems: 'center',
         justifyContent: 'center',
         margin: 20,
@@ -279,7 +271,7 @@ const matchStyles = StyleSheet.create({
         flexDirection: 'row',
     },
     InputContainer: {
-        height: 80,
+        height: 100,
         paddingLeft: 20,
         borderWidth: 2,
         borderColor: '#d4d4d4',
