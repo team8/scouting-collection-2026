@@ -37,6 +37,9 @@
         "projectId": "f17ff963-124a-4b58-9705-480050ab82c6"
       }
     },
-    "owner": "kaitlinye"
+    "owner": "kaitlinye",
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

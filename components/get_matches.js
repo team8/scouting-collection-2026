@@ -5,7 +5,7 @@ import * as Types from "../store/types";
 
 function GetMatches(props) {
     return (
-        <TouchableOpacity onPress={() => props.matchesModal(true)}>
+        <TouchableOpacity style={{ paddingHorizontal: 16 }} onPress={() => props.matchesModal(true)}>
             <Text style={{ color: "white", fontSize: 16 }}>Get Matches</Text>
         </TouchableOpacity>
     )

@@ -15,6 +15,8 @@ import GetMatches from "./components/get_matches";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { Platform } from 'react-native';
+import { useFonts } from 'expo-font';
+import { Ionicons, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 if (Platform.OS === 'web' && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -25,6 +27,14 @@ if (Platform.OS === 'web' && 'serviceWorker' in navigator) {
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  // load icon fonts up front so icons don't flash as fallback emoji on web
+  const [fontsLoaded] = useFonts({
+    ...Ionicons.font,
+    ...MaterialIcons.font,
+    ...MaterialCommunityIcons.font,
+  });
+  if (!fontsLoaded) return null;
+
   return (
     <Provider store={store}>
       <NavigationContainer>

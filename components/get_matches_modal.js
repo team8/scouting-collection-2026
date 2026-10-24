@@ -83,11 +83,11 @@ function GetMatchesModal(props) {
                 </View>
               </View>
             </View>
-            <View style={{flex: 0.8, paddingHorizontal: 40, flexDirection: 'row'}}>
+            <View style={{flex: 0.8, width: '100%', flexDirection: 'row'}}>
               <TouchableOpacity
                 style={[
                   getMatchModalStyles.UndoButton,
-                  {marginHorizontal: 30, marginBottom: 25},
+                  {marginHorizontal: 15, marginBottom: 25},
                 ]}
                 onPress={() => props.matchesModal(false)}
                 >
@@ -104,7 +104,7 @@ function GetMatchesModal(props) {
               <TouchableOpacity
                 style={[
                   getMatchModalStyles.NextButton,
-                  {marginHorizontal: 30, marginBottom: 25},
+                  {marginHorizontal: 15, marginBottom: 25},
                 ]}
                 onPress={() => saveEvent()}
                 >
@@ -127,7 +127,8 @@ function GetMatchesModal(props) {
 const getMatchModalStyles = StyleSheet.create({
     ModalContent: {
       flex: 0.3,
-      width: 600,
+      width: '90%',
+      maxWidth: 600,
       backgroundColor: 'white',
       borderRadius: 15,
       padding: 20,
@@ -136,12 +137,14 @@ const getMatchModalStyles = StyleSheet.create({
     },
     InputContainer: {
       height: 100,
-      paddingLeft: 20,
+      width: '100%',
+      paddingHorizontal: 20,
       alignItems: 'center',
       justifyContent: 'center',
     },
     Row: {
       flexDirection: 'row',
+      width: '100%',
       marginTop: 25,
     },
     LabelText: {
@@ -158,7 +161,7 @@ const getMatchModalStyles = StyleSheet.create({
     TextInputContainer: {
       borderBottomWidth: 3,
       borderBottomColor: '#d4d4d4',
-      flex: 0.7,
+      flex: 1,
     },
     UndoButton: {
       flex: 1,

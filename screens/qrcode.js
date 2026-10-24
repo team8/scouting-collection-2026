@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, Platform, useWindowDimensions } from "react-native";
 import { connect } from 'react-redux';
 import * as Types from '../store/types';
 import { useNavigation } from '@react-navigation/native';
@@ -18,6 +18,8 @@ function QRCodeScreen(props) {
     //console.log(JSON.parse(JSON.stringify(encodeStringData(matchData))))
     
     const navigation = useNavigation();
+    const { width, height } = useWindowDimensions();
+    const qrSize = Math.min(width * 0.4 - 60, height * 0.6);
 
     useEffect(() => {
         navigation.setOptions({
@@ -46,6 +48,18 @@ function QRCodeScreen(props) {
         navigation.navigate('Match List');
     }
 
+    // Alert.alert does nothing on react-native-web, so use the browser's confirm dialog there
+    const confirmFinish = () => {
+        if (Platform.OS === 'web') {
+            if (window.confirm('Wait! Did your QR code get scanned?')) navigate();
+            return;
+        }
+        Alert.alert('Wait!', 'Did Your Qrcode Get Scanned?', [
+            { text: 'Cancel' },
+            { text: 'Yes', onPress: () => navigate() },
+        ])
+    }
+
     return (
 
         <View style={qrcodeStyles.MainContainer}>
@@ -59,7 +73,7 @@ function QRCodeScreen(props) {
                         <View style={{ borderWidth: 0, borderColor: '#d4d4d4', height: '100%', alignSelf:'center', justifyContent:'center' }}>
                             {qrString != "" && <QRCode
                                 value={qrString}
-                                size={400}
+                                size={qrSize}
                             />
                             }
 
@@ -69,26 +83,17 @@ function QRCodeScreen(props) {
 
                     {/* Next button */}
                     <View style={{ flex: 0.3, borderColor: 'blue', borderWidth: 0, justifyContent:'center' }}>
-                        <TouchableOpacity style={[qrcodeStyles.NextButton, { justifyContent: 'center', marginLeft:'5%', marginRight:'5%' }]} onPress={() => 
-                            Alert.alert('Wait!', 'Did Your Qrcode Get Scanned?', [
-                                {
-                                  text: 'Cancel',
-                                  onPress: () => console.log('Cancel Pressed'),
-                                },
-                                {text: 'Yes', onPress: () => navigate()},
-                              ])
-                            
-                            }><Text style={[{ alignSelf: 'center', color: 'white' }, qrcodeStyles.ButtonFont]}>Finish</Text></TouchableOpacity>
+                        <TouchableOpacity style={[qrcodeStyles.NextButton, { justifyContent: 'center', marginLeft:'5%', marginRight:'5%' }]} onPress={confirmFinish}><Text style={[{ alignSelf: 'center', color: 'white' }, qrcodeStyles.ButtonFont]}>Finish</Text></TouchableOpacity>
                     </View>
                 </View>
                 <View style={{ flex: 0.6, borderColor: 'orange', borderWidth: 0 }}>
                     {/* Data view */}
-                    <View style={{ borderColor: 'yellow', borderWidth: 0, flexDirection: 'column', marginLeft:'5%' }}>
+                    <View style={{ flex: 1, borderColor: 'yellow', borderWidth: 0, flexDirection: 'column', marginLeft:'5%' }}>
                         <View style={{alignSelf:'center'}}>
                             <Text style={[qrcodeStyles.Font, {}]}>Data</Text>
                         </View>
-                        <View style={{}}>
-                            <ScrollView style={{borderColor: 'grey', borderWidth: 0, height:'95%'}}>
+                        <View style={{ flex: 1 }}>
+                            <ScrollView style={{ flex: 1, borderColor: 'grey', borderWidth: 0 }}>
                                 {Object.keys(matchData).map((key) => {
 
                                     return (
@@ -130,7 +135,7 @@ const qrcodeStyles = StyleSheet.create({
     },
     NextButton: {
         backgroundColor: '#2E8B57',
-        borderRadius: '7%',
+        borderRadius: 7,
         borderBottomWidth: 5,
         borderColor: '#006400',
         padding: '5%'

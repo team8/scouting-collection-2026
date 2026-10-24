@@ -98,8 +98,8 @@ function FullMatch(props) {
             keyboardDismissMode='interactive'
         >
             <View style={matchStyles.mainContainer}>
-                <View style={{flex: 0.7, alignItems: 'center', justifyContent: 'center'}}>
-                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{flex: 0.7, justifyContent: 'center'}}>
+                    <View style={matchStyles.NotesRow}>
                         <Text style={matchStyles.Label}>Auto Notes</Text>
                         <View style={matchStyles.InputContainer}>
                             <TextInput
@@ -112,7 +112,7 @@ function FullMatch(props) {
                             />
                         </View>
                     </View>
-                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={matchStyles.NotesRow}>
                         <Text style={matchStyles.Label}>Drive Notes</Text>
                         <View style={matchStyles.InputContainer}>
                             <TextInput
@@ -125,7 +125,7 @@ function FullMatch(props) {
                             />
                         </View>
                     </View>
-                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={matchStyles.NotesRow}>
                         <Text style={matchStyles.Label}>Intake Notes</Text>
                         <View style={matchStyles.InputContainer}>
                             <TextInput
@@ -138,7 +138,7 @@ function FullMatch(props) {
                             />
                         </View>
                     </View>
-                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={matchStyles.NotesRow}>
                         <Text style={matchStyles.Label}>Defense Notes</Text>
                         <View style={matchStyles.InputContainer}>
                             <TextInput
@@ -151,7 +151,7 @@ function FullMatch(props) {
                             />
                         </View>
                     </View>
-                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={matchStyles.NotesRow}>
                         <Text style={matchStyles.Label}>Cycle Notes</Text>
                         <View style={matchStyles.InputContainer}>
                             <TextInput
@@ -164,7 +164,7 @@ function FullMatch(props) {
                             />
                         </View>
                     </View>
-                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={matchStyles.NotesRow}>
                         <Text style={matchStyles.Label}>Climb Notes</Text>
                         <View style={matchStyles.InputContainer}>
                             <TextInput
@@ -177,7 +177,7 @@ function FullMatch(props) {
                             />
                         </View>
                     </View>
-                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={matchStyles.NotesRow}>
                         <Text style={matchStyles.Label}>Shooting Notes</Text>
                         <View style={matchStyles.InputContainer}>
                             <TextInput
@@ -191,7 +191,7 @@ function FullMatch(props) {
                         </View>
                     </View>
                 </View>
-                <View style={{flex: 0.3, alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{flex: 0.3, justifyContent: 'center'}}>
                     <View style={matchStyles.SwitchContainer}>
                         <Stopwatch
                             time={autoTime}
@@ -201,46 +201,46 @@ function FullMatch(props) {
                     <View style={matchStyles.SwitchContainer}>
                         <Text style={matchStyles.ScoreHeader}>Robot Mishaps</Text>
                         <View style={matchStyles.Row}>
-                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Died</Text>
-                            <Switch style={{flex: 0.5}} value={died} onValueChange={setDied} />
+                            <Text style={matchStyles.SwitchLabel}>Died</Text>
+                            <Switch value={died} onValueChange={setDied} />
                         </View>
                         <View style={matchStyles.Row}>
-                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Stuck</Text>
-                            <Switch style={{flex: 0.5}} value={stuck} onValueChange={setStuck} />
+                            <Text style={matchStyles.SwitchLabel}>Stuck</Text>
+                            <Switch value={stuck} onValueChange={setStuck} />
                         </View>
                         <View style={matchStyles.Row}>
-                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Tipped</Text>
-                            <Switch style={{flex: 0.5}} value={tipped} onValueChange={setTipped} />
+                            <Text style={matchStyles.SwitchLabel}>Tipped</Text>
+                            <Switch value={tipped} onValueChange={setTipped} />
                         </View>
                     </View>
                     <View style={matchStyles.SwitchContainer}>
                         <Text style={matchStyles.ScoreHeader}>Auto Locations Used</Text>
                         <View style={matchStyles.Row}>
-                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Depot</Text>
-                            <Switch style={{flex: 0.5}} value={autoDepot} onValueChange={setAutoDepot} />
+                            <Text style={matchStyles.SwitchLabel}>Depot</Text>
+                            <Switch value={autoDepot} onValueChange={setAutoDepot} />
                         </View>
                         <View style={matchStyles.Row}>
-                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Source</Text>
-                            <Switch style={{flex: 0.5}} value={autoSource} onValueChange={setAutoSource} />
+                            <Text style={matchStyles.SwitchLabel}>Source</Text>
+                            <Switch value={autoSource} onValueChange={setAutoSource} />
                         </View>
                         <View style={matchStyles.Row}>
-                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Neutral Zone</Text>
-                            <Switch style={{flex: 0.5}} value={autoMid} onValueChange={setAutoMid} />
+                            <Text style={matchStyles.SwitchLabel}>Neutral Zone</Text>
+                            <Switch value={autoMid} onValueChange={setAutoMid} />
                         </View>
                     </View>
                     <View style={matchStyles.SwitchContainer}>
                         <Text style={matchStyles.ScoreHeader}>Intake Locations</Text>
                         <View style={matchStyles.Row}>
-                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Ground Intake</Text>
-                            <Switch style={{flex: 0.5}} value={groundIntake} onValueChange={setGroundIntake} />
+                            <Text style={matchStyles.SwitchLabel}>Ground Intake</Text>
+                            <Switch value={groundIntake} onValueChange={setGroundIntake} />
                         </View>
                         <View style={matchStyles.Row}>
-                            <Text style={[matchStyles.Label, {flex: 0.5}]}>Source Intake</Text>
-                            <Switch style={{flex: 0.5}} value={sourceIntake} onValueChange={setSourceIntake} />
+                            <Text style={matchStyles.SwitchLabel}>Source Intake</Text>
+                            <Switch value={sourceIntake} onValueChange={setSourceIntake} />
                         </View>
                     </View>
                     <View style={{flex: 0.5, alignItems: 'center', justifyContent: 'center'}}>
-                        <TouchableOpacity style={[matchStyles.NextButton, { width: 300, height: 80, marginBottom: 10, marginRight: 5, marginLeft: 5, justifyContent: 'center', alignItems: 'center' }]} onPress={() => navigate()}>
+                        <TouchableOpacity style={[matchStyles.NextButton, { width: '90%', height: 80, marginBottom: 10, justifyContent: 'center', alignItems: 'center' }]} onPress={() => navigate()}>
                             <Text style={[matchStyles.ButtonFont, {textAlign: 'center'}]}>Continue to QR Code</Text>
                         </TouchableOpacity>
                     </View>
@@ -262,23 +262,44 @@ const matchStyles = StyleSheet.create({
       fontSize: 25,
     },
     SwitchContainer: {
-        flex: 0.8,
         alignItems: 'center',
         justifyContent: 'center',
         margin: 20,
     },
     Row: {
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+        paddingHorizontal: 10,
+        marginVertical: 4,
+    },
+    SwitchLabel: {
+        fontFamily: 'Helvetica-Light',
+        fontSize: 20,
+        flex: 1,
+        paddingRight: 10,
+    },
+    NotesRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        marginVertical: 8,
     },
     InputContainer: {
-        height: 100,
-        paddingLeft: 20,
+        height: 110,
         borderWidth: 2,
         borderColor: '#d4d4d4',
-        flex: 0.8
+        flex: 0.8,
+        marginRight: 10,
     },
     TextInputContainer: {
-        flex: 1
+        flex: 1,
+        width: '100%',
+        padding: 8,
+        // 16px+ keeps iOS Safari from zooming in on focus
+        fontSize: 16,
+        textAlignVertical: 'top',
     },
     Label: {
         fontFamily: 'Helvetica-Light',

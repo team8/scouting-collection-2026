@@ -10,7 +10,7 @@ import GetMatchesModal from "../components/get_matches_modal"
 
 function MatchList(props) {
     const navigation = useNavigation(); 
-    const iconComplete = <Icon name='md-checkmark-circle' type='ionicon' color='#32CD32' />;
+    const iconComplete = <Icon name='checkmark-circle' type='ionicon' color='#32CD32' />;
     const iconUnfinished = <Icon name='plus-circle' type='material-community' color='#4583E8' />;
 
     useEffect(() => {
@@ -44,8 +44,8 @@ function MatchList(props) {
     }
 
     return (
-        <View>
-            <ScrollView style={{ paddingHorizontal: 20, fontFamily: 'Helvetica-Light' }}>
+        <View style={{ flex: 1 }}>
+            <ScrollView style={{ flex: 1, paddingHorizontal: 20 }}>
                 {props.eventReducer.matches &&
                     props.eventReducer.matches.map((match, i) => (
                         <TouchableOpacity key={i} onPress={() => navigate(i)}>
