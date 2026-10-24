@@ -13,7 +13,7 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/82cde4e1-ff96-43d8-8af6-f71b71c21442"
+      "url": "https://u.expo.dev/f17ff963-124a-4b58-9705-480050ab82c6"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -34,9 +34,9 @@
     "runtimeVersion": "1.0.0",
     "extra": {
       "eas": {
-        "projectId": "82cde4e1-ff96-43d8-8af6-f71b71c21442"
+        "projectId": "f17ff963-124a-4b58-9705-480050ab82c6"
       }
     },
-    "owner": "joycelynzhou"
+    "owner": "kaitlinye"
   }
 }

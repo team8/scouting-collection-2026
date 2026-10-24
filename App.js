@@ -14,6 +14,13 @@ import GetMatches from "./components/get_matches";
 
 import { Provider } from "react-redux";
 import store from "./store/store";
+import { Platform } from 'react-native';
+
+if (Platform.OS === 'web' && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js');
+  });
+}
 
 const Stack = createNativeStackNavigator();
 
